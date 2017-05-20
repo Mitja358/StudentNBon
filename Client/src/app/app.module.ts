@@ -7,11 +7,15 @@ import { HttpModule } from '@angular/http';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import { RestavracijePage } from '../pages/restavracije/restavracije';
+import { PodrobnostiPage } from '../pages/podrobnosti/podrobnosti';
+import { NastavitvePage } from '../pages/nastavitve/nastavitve';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { PrikazRestavracij } from '../providers/prikaz-restavracij';
+import { RestavracijeServiceProvider } from '../providers/restavracije-service';
+import { MenijiServiceProvider } from '../providers/meniji-service';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,9 @@ import { PrikazRestavracij } from '../providers/prikaz-restavracij';
     AboutPage,
     ContactPage,
     HomePage,
+    RestavracijePage, 
+    PodrobnostiPage,
+    NastavitvePage,
     TabsPage
   ],
   imports: [
@@ -32,13 +39,17 @@ import { PrikazRestavracij } from '../providers/prikaz-restavracij';
     AboutPage,
     ContactPage,
     HomePage,
+    RestavracijePage,
+    PodrobnostiPage,
+    NastavitvePage,
     TabsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PrikazRestavracij
+    RestavracijeServiceProvider,
+    MenijiServiceProvider
   ]
 })
 export class AppModule {}

@@ -4,38 +4,39 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
-
 /*
-  Generated class for the PrikazRestavracijProvider provider.
+  Generated class for the MenijiServiceProvider provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class PrikazRestavracij {
+export class MenijiServiceProvider {
 
-  private url: string = "http://localhost:3000/restavracije";
+  private url: string = "http://localhost:3000/meniji/";
 
   constructor(public http: Http) {
-    console.log('Hello PrikazRestavracij');
+    console.log('Hello MenijiServiceProvider Provider');
   }
-  getRestaurants(){
+
+  getMenije(){
     return this.http.get(this.url)
-    .map(this.extractData)
-    .do(this.logResponse)
-    .catch(this.catchError);
+    .do(this.logResponse) //.do((res: Response) => console.log(res))
+    .map(this.extractData) //.map((res: Response) => res.json());
+    .do(this.logResponse) //.do((res: Response) => console.log(res))
+    .catch(this.catchError)
   }
 
   private catchError(error: Response | any){
     console.log(error);
-    return Observable.throw(error.json().error || "Server error.");
+    return Observable.throw(error.json().error || "Server error");
   }
 
   private logResponse(res: Response){
     console.log(res);
   }
 
-  private extractData(res: Response){
+  private extractData(res:Response){
     return res.json();
   }
 }
