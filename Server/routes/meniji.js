@@ -51,7 +51,7 @@ router.post('/', (req, res, next) => {
 });
 
 //@GET getMenu
-router.get('/:id', (req, res, next) => {
+router.get('/meni/:id', (req, res, next) => {
     new Meni({id: req.params.id})
     .fetch({ withRelated:['restavracija']})
     .then((data) => {
@@ -67,7 +67,7 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-//@PUT createMenu
+//@PUT updateMenu
 router.put('/:id', (req, res, next) => {
     new Meni({ id: req.params.id })
     .fetch({ require:true })
@@ -104,68 +104,23 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
-
-/*var Meni = require('../classes/Meni.js');
-
-let meni1 = new Meni(1, 'dnevna zelenjavna juha', 'riž chilli con carne', 'dnevna mešana solata', 'sadje', 'mesni');
-    meni2 = new Meni(2, 'dnevna zelenjavna juha', 'riž peanut', 'dnevna mešana solata', 'sadje', 'veganski');
-    meni3 = new Meni(3, 'dnevna zelenjavna juha', 'riž ratatouile', 'dnevna mešana solata', 'sadje', 'vegetarijanski');
-    poljeMenijev.push(meni1);
-    poljeMenijev.push(meni2);
-    poljeMenijev.push(meni3);
-
-//@GET getMenu (all)
-router.get('/', (req, res, next)=>{
-    res.json(poljeMenijev); 
+//@GET pridobi vse menije določene restavracije
+router.get('/restavracija/:restavracija_id', (req, res, next) => {
+    knex('meni')
+    .select()
+    .where({'restavracija_id':req.params.restavracija_id})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.status(404).json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
 });
 
-//@POST createMenu
-router.post('/', (req, res, next)=>{
-    let menix = new Meni(poljeMenijev.length +1, req.body.juha, req.body.glavnaJed, req.body.solata, req.body.sladica, req.body.vrsta);
-    poljeMenijev.push(menix)
-    res.json(menix);
-});
-
-//@GET getMenu 
-router.get('/:id', (req, res, next)=>{
-    if(req.params.id<poljeMenijev.length+1 && req.params.id>=1){
-        res.json(poljeMenijev[req.params.id-1]); 
-    }else{
-        res.send('Meni ne obstaja!');
-        //res.sendStatus(404);
-    }
-});
-
-//@PUT updateMenu
-router.put('/:id', (req, res, next)=>{
-    if(req.params.id<poljeMenijev.length+1 && req.params.id>=1){
-        var meniId = poljeMenijev[req.params.id-1]; 
-
-            meniId.id = req.body.id;
-            meniId.juha = req.body.juha;
-            meniId.glavnaJed = req.body.glavnaJed;
-            meniId.solata = req.body.solata;
-            meniId.sladica = req.body.sladica;
-            meniId.vrsta = req.body.vrsta;
-
-        res.json(poljeMenijev[meniId]); 
-    }else{
-        //res.sendStatus(404);
-        res.send('Meni ne obstaja!');
-    }
-
-}); 
-
-//@DELETE deleteMenu 
-router.delete('/:id', (req, res, next)=>{
-    if(req.params.id<poljeMenijev.length+1 && req.params.id>=1){
-        poljeMenijev.splice(req.params.id-1, 1);
-        res.send('Meni je izbrisan!');
-    }else{
-        //res.sendStatus(404);
-        res.send('Meni ne obstaja!');
-    }
-});
-*/
 
 module.exports = router; 

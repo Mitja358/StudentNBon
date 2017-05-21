@@ -49,7 +49,7 @@ router.post('/', (req, res, next) => {
     });
 });
 
-//@GET getRestaurant 
+//@GET getRestaurant by ID
 router.get('/:id', (req, res, next) => {
     new Restavracija({id: req.params.id})
     .fetch()
@@ -66,6 +66,7 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
+//@PUT updateRestaurant
 router.put('/:id', (req, res, next) => {
     new Restavracija({ id: req.params.id })
     .fetch({ require:true })
@@ -101,60 +102,22 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
-/*
-let restavracija1 = new Restavracija(1, 'London Street Food', 'Strossmayerjeva ulica 26', 'Maribor', 5.60, 2.97);
-    restavracija2 = new Restavracija(2, 'Lunch box', 'Gosposvetska cesta 19', 'Maribor', 2.63, 0.00);
-    restavracija3 = new Restavracija(3, 'Restavracija Mr. Falafel', 'Gosposka ulica 30', 'Maribor', 6.13, 3.50);
-    poljeRestavracij.push(restavracija1);
-    poljeRestavracij.push(restavracija2);
-    poljeRestavracij.push(restavracija3);
-
-//@GET getRestaurant 
-router.get('/:id', (req, res, next)=>{
-    if(req.params.id<poljeRestavracij.length+1 && req.params.id>=1){
-        res.json(poljeRestavracij[req.params.id-1]);
-    }else{
-        res.send('Restavracija ne obstaja!');
-        //res.sendStatus(404);
-    }
+//@GET pridobi vse restavracije iz iskanega mesta
+router.get('/kraj/:mesto', (req, res, next) => {
+    knex('restavracija')
+    .select()
+    .where({'mesto':req.params.mesto})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.status(404).json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
 });
-
-//@GET getRestaurants (all)
-router.get('/', (req, res, next)=>{
-    res.json(poljeRestavracij);
-});
-
-//@POST createRestaurant 
-router.post('/', (req, res, next)=>{
-    let restavracijax = new Restavracija(poljeRestavracij.length +1, req.body.naziv, req.body.naslov, req.body.mesto, req.body.vrednostObroka, req.body.vrednostDoplacila);
-    poljeRestavracij.push(restavracijax)
-    res.json( restavracijax);
-});
-
-//@PUT updateRestaurant 
-router.put('/:id', (req, res, next)=>{
-var restavracijaId = poljeRestavracij[req.params.id-1]; 
-    restavracijaId.id = req.body.id;
-    restavracijaId.naziv = req.body.naziv;
-    restavracijaId.naslov = req.body.naslov;
-    restavracijaId.mesto = req.body.mesto;
-    restavracijaId.vrednostObroka = req.body.vrednostObroka;
-    restavracijaId.vrednostDoplacila = req.body.vrednostDoplacila; 
-
-    res.json(restavracijaId);
-}); 
-
-//@DELETE deleteRestaurant 
-router.delete('/:id', (req, res, next)=>{
-    if(req.params.id<poljeRestavracij.length+1 && req.params.id>=1){     
-        delete poljeRestavracij[req.params.id-1];
-        res.send('Restavracija je izbrisana!');  
-    }else{
-        //res.sendStatus(404);
-        res.send('Restavracija ne obstaja!');
-    }
-});
-*/
-
 
 module.exports = router; 
