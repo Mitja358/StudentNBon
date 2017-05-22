@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -10,12 +12,12 @@ import { HomePage } from '../pages/home/home';
 import { RestavracijePage } from '../pages/restavracije/restavracije';
 import { PodrobnostiPage } from '../pages/podrobnosti/podrobnosti';
 import { NastavitvePage } from '../pages/nastavitve/nastavitve';
+import { PrijavaPage } from '../pages/prijava/prijava';
 import { TabsPage } from '../pages/tabs/tabs';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestavracijeServiceProvider } from '../providers/restavracije-service';
 import { MenijiServiceProvider } from '../providers/meniji-service';
+import { AvtorizacijaServiceProvider } from '../providers/avtorizacija-service';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { MenijiServiceProvider } from '../providers/meniji-service';
     RestavracijePage, 
     PodrobnostiPage,
     NastavitvePage,
+    PrijavaPage,
     TabsPage
   ],
   imports: [
@@ -42,6 +45,7 @@ import { MenijiServiceProvider } from '../providers/meniji-service';
     RestavracijePage,
     PodrobnostiPage,
     NastavitvePage,
+    PrijavaPage,
     TabsPage
   ],
   providers: [
@@ -49,7 +53,8 @@ import { MenijiServiceProvider } from '../providers/meniji-service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestavracijeServiceProvider,
-    MenijiServiceProvider
+    MenijiServiceProvider,
+    AvtorizacijaServiceProvider
   ]
 })
 export class AppModule {}
