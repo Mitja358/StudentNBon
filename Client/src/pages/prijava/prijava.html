@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar color = "primary">
+    <ion-title>Prijava</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="login-content" padding>
+  <ion-row class="logo-row">
+    <ion-col></ion-col>
+    <ion-col width-67>
+      <img src="http://placehold.it/300x200" />
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <div class="login-box">
+    <form (ngSubmit)="prijava()" #prijavniObrazec="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            <ion-item>
+              <ion-input type="text" placeholder="Vnesite email" name="email" [(ngModel)]="prijavniPodatki.email" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="password" placeholder="Vnesite geslo" name="geslo" [(ngModel)]="prijavniPodatki.geslo" required></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!prijavniObrazec.form.valid">Prijava</button>
+          <button ion-button class="register-btn" block clear (click)="ustvariRacun()">Ustvari račun</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>

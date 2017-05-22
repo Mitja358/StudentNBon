@@ -3,18 +3,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestavracijeServiceProvider } from "../../providers/restavracije-service";
 import { PodrobnostiPage } from '../../pages/podrobnosti/podrobnosti';
 
-
-/**
- * Generated class for the RestavracijePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-restavracije',
   templateUrl: 'restavracije.html',
 })
+
 export class RestavracijePage {
 
   seznamRestavracij = [];
