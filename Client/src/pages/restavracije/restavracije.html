@@ -1,5 +1,6 @@
 <ion-header>
   <ion-navbar color = "primary">
+  <ion-navbar color="primary">
     <ion-title>Restavracije</ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,6 +11,9 @@
       <h2><b>{{restavracija.naziv_restavracije}}</b></h2><br/> 
       <button ion-button clear item-right (click)="podrobnostiRestavracije(restavracija)">Podrobnosti</button>
       Naslov: {{restavracija.naslov}}, {{restavracija.mesto}}<br/> 
+      <h2><b>{{restavracija.naziv_restavracije}}</b></h2>
+      <button ion-button clear item-right (click)="podrobnostiRestavracije(restavracija)">Več</button> 
+      Naslov: {{restavracija.naslov}}, {{restavracija.mesto}} <br/> 
       Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
       Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 
     </ion-item>

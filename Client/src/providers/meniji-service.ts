@@ -13,14 +13,14 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class MenijiServiceProvider {
 
-  private url: string = "http://localhost:3000/meniji/";
+  private url: string = "http://localhost:3000/meniji/restavracija";
 
   constructor(public http: Http) {
     console.log('Hello MenijiServiceProvider Provider');
   }
 
-  getMenije(){
-    return this.http.get(this.url)
+  getMenije(restavracija){
+    return this.http.get(this.url + "/" + restavracija.id)
     .do(this.logResponse) //.do((res: Response) => console.log(res))
     .map(this.extractData) //.map((res: Response) => res.json());
     .do(this.logResponse) //.do((res: Response) => console.log(res))

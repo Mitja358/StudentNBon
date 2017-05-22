@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{restavracija.naziv_restavracije}}</ion-title>
   </ion-navbar>
 
@@ -14,19 +14,18 @@
 
 
 <ion-content padding>
-      <h2>{{restavracija.naziv_restavracije}}</h2><br/> 
-      Naslov: {{restavracija.naslov}}, {{restavracija.mesto}} <br/> 
-      Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
-      Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 
+  Naslov: {{restavracija.naslov}}, {{restavracija.mesto}} <br/> 
+  Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
+  Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 
 
+  <h5>Ponudba</h5>
   <ion-list>    
     <ion-item *ngFor="let meni of seznamMenijev">
-      <b>{{meni.id}} meni </b><br/>
+      <b>{{meni.vrstaMenija}} meni</b><br/>
       Juha: {{meni.juha}} <br/>
       Glavna jed: {{meni.glavnaJed}} <br/>
       Solata: {{meni.solata}} <br/> 
       Sladica: {{meni.sladica}} <br/> 
-      {{meni.vrstaMenija}} <br/> 
     </ion-item>
   </ion-list>
 

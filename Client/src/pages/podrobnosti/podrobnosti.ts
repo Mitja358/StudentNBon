@@ -15,16 +15,17 @@ import { MenijiServiceProvider } from "../../providers/meniji-service";
 })
 export class PodrobnostiPage {
 
-  restavracija: any; 
+
   seznamMenijev = [];
+  restavracija: any; 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menijiService: MenijiServiceProvider) {
-    this.restavracija = navParams.get('restavracija')
-    this.getMenije();
+    this.restavracija = navParams.get('restavracija'); 
+    this.getMenije(this.restavracija);
   }
 
-  getMenije(){
-    this.menijiService.getMenije().subscribe(data => this.seznamMenijev = data);
+  getMenije(restavracija){
+      this.menijiService.getMenije(restavracija).subscribe(data => this.seznamMenijev = data);
   }
 
   ionViewDidLoad() {
