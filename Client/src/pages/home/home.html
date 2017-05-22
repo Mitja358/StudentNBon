@@ -1,9 +1,14 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Home</ion-title>
+    <ion-title>Domača stran</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="odjava()">
+        <ion-icon name="odjava"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <p>Home page</p>
+<ion-content class="home" padding>
+  <h3>Dobrodošel {{uporabniskoIme}}!</h3>
 </ion-content>
