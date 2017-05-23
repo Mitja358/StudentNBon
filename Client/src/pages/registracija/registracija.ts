@@ -1,20 +1,49 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-service';
 
-/**
- * Generated class for the RegistracijaPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-registracija',
   templateUrl: 'registracija.html',
 })
-export class RegistracijaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class RegistracijaPage {
+  createSuccess = false;
+  registracijskiPodatki = { email: '', geslo: '' };
+
+  constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider, private alertCtrl: AlertController, private navParams: NavParams) { }
+
+  public registracija() {
+    this.avtorizacija.registracija(this.registracijskiPodatki).subscribe(success => {
+      if (success) {
+        this.createSuccess = true;
+        this.pokaziObvestilo("Uspešno", "Račun uspešno ustvarjen.");
+      } else {
+        this.pokaziObvestilo("Napaka", "Težava pri ustvarjanju računa.")
+      }
+    },
+      error => {
+        this.pokaziObvestilo("Napaka", error);
+      });
+  }
+
+  pokaziObvestilo(title, text) {
+    let opozorilo = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'OK',
+          handler: data => {
+            if (this.createSuccess) {
+              this.navCtrl.popToRoot();
+            }
+          }
+        }
+      ]
+    });
+    opozorilo.present();
   }
 
   ionViewDidLoad() {
