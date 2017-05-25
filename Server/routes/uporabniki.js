@@ -109,4 +109,21 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
+router.get('/prijava/:email&:geslo', (req, res, next) => {
+    knex('uporabnik')
+    .select('email', 'geslo')
+    .where({'email':req.params.email}).andWhere({'geslo':req.params.geslo})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
+
 module.exports = router; 

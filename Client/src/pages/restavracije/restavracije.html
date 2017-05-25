@@ -2,14 +2,17 @@
   <ion-navbar color="primary">
     <ion-title>Restavracije</ion-title>
   </ion-navbar>
+    <!--<ion-searchbar
+      [(ngModel)]="query"
+    </ion-searchbar>-->
+    <ion-searchbar (ionInput)="filter($event)" [showCancelButton]="ShowCancel" placeholder="Poišči restavracijo..."></ion-searchbar>
 </ion-header>
-
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let restavracija of seznamRestavracij">
       <h2><b>{{restavracija.naziv_restavracije}}</b></h2>
-      <button ion-button item-right (click)="podrobnostiRestavracije(restavracija)">Več</button> 
-      Naslov: {{restavracija.naslov}}, {{restavracija.mesto}} <br/> 
+      <button ion-button item-right (click)="podrobnostiRestavracije(restavracija) ">Več</button> 
+      Naslov: {{restavracija.naslov+ ', ' + restavracija.mesto}} <br/>
       Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
       Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 
     </ion-item>
