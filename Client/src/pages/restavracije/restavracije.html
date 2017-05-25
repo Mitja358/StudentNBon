@@ -8,7 +8,7 @@
   <ion-list>
     <ion-item *ngFor="let restavracija of seznamRestavracij">
       <h2><b>{{restavracija.naziv_restavracije}}</b></h2>
-      <button ion-button clear item-right (click)="podrobnostiRestavracije(restavracija)">Več</button> 
+      <button ion-button item-right (click)="podrobnostiRestavracije(restavracija)">Več</button> 
       Naslov: {{restavracija.naslov}}, {{restavracija.mesto}} <br/> 
       Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
       Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 

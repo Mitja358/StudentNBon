@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
 
 export class Uporabnik {
   ime: string;
@@ -21,6 +24,48 @@ export class Uporabnik {
 @Injectable()
 export class AvtorizacijaServiceProvider {
   trenutniUporabnik: Uporabnik;
+  private url: string = "http://localhost:3000/uporabniki";
+  seznamUporabnikov = [];
+
+  constructor(private http: Http) {
+    this.getEmail();
+    this.getGeslo();
+  }
+
+  getEmail(){
+    return this.http.get(this.url)
+    .map(this.extractData)
+    .do(this.logResponse)
+    .catch(this.catchError);
+  }
+
+  getGeslo(){
+    return this.http.get(this.url)
+    .map(this.extractData2)
+    .do(this.logResponse)
+    .catch(this.catchError);
+  }
+
+  private catchError(error: Response | any) {
+    console.log(error);
+    return Observable.throw(error.json().error || "Server error.");
+  }
+
+  private logResponse(res: Response) {
+    console.log(res);
+  }
+
+  private extractData(res: Response) {
+    let podatki = res.json();
+    let podatki2 = podatki[0].email;
+    return podatki2;
+  }
+
+  private extractData2(res: Response) {
+    let podatki = res.json();
+    let podatki2 = podatki[0].geslo;
+    return podatki2;
+  }
 
   public prijava(prijavni_podatki) {
     if (prijavni_podatki.email === null || prijavni_podatki.geslo === null) {
@@ -28,11 +73,19 @@ export class AvtorizacijaServiceProvider {
       return Observable.throw("Prosimo vnesite podatke za prijavo");
     } else {
       return Observable.create(observer => {
+        //this.seznamUporabnikov = data
+        this.getEmail().subscribe(data => {
+          this.seznamUporabnikov = data
+          let nekaj = data;
+          console.log("MAIL: " + this.seznamUporabnikov);
+
         // Implementacija realnega preverjanja (store a token?)
-        let dostop = (prijavni_podatki.geslo === "geslo" && prijavni_podatki.email === "email");
+        let dostop = (prijavni_podatki.geslo === "geslo" && prijavni_podatki.email === this.seznamUporabnikov);
+      
         this.trenutniUporabnik = new Uporabnik('Mitja', 'mitja.bernjak@gmail.com');
         observer.next(dostop);
         observer.complete();
+        })
       });
     }
   }
