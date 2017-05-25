@@ -115,10 +115,10 @@ router.get('/prijava/:email&:geslo', (req, res, next) => {
     .where({'email':req.params.email}).andWhere({'geslo':req.params.geslo})
     .then((data) => {
         if (data) {
-            res.json(true);
+            res.json(data);
         }
         else {
-            res.status(404).json(err);
+            res.json(err);
         }
     })
     .catch((err) => {
