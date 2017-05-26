@@ -15,49 +15,60 @@
  
 <ion-content padding>
  
-    <ion-list no-lines>
- 
-      <ion-item>
-        <ion-label><ion-icon name="navigate"></ion-icon>  Kranj</ion-label>
-        <ion-select [(ngModel)]="kraj" multiple="true" cancelText="Prekliči" okText="Potrdi">
-          <ion-option value="ajdovscina">Ajdovščina</ion-option>
-          <ion-option value="bled">Bled</ion-option>
-          <ion-option value="brezice">Brežice</ion-option>
-          <ion-option value="celje">Celje</ion-option>
-          <ion-option value="domzale">Domžale</ion-option>
-          <ion-option value="hoce">Hoče</ion-option>
-          <ion-option value="izola">Izola</ion-option>
-          <ion-option value="jesenice">Jesenice</ion-option>
-          <ion-option value="kamnik">Kamnik</ion-option>
-          <ion-option value="koper">Koper</ion-option>
-          <ion-option value="kranj">Kranj</ion-option> 
-          <ion-option value="krsko">Krško</ion-option> 
-          <ion-option value="ljubljana">Ljubljana</ion-option>
-          <ion-option value="ljubljanaSentvid">Ljubljana - Šentvid</ion-option>
-          <ion-option value="maribor">Maribor</ion-option>
-          <ion-option value="mozirje">Mozirje</ion-option>
-          <ion-option value="murskaSobota">Murska Sobota</ion-option>
-          <ion-option value="naklo">Naklo</ion-option>
-          <ion-option value="novaGorica">Nova Gorica</ion-option>
-          <ion-option value="novoMesto"> Novo mesto</ion-option>
-          <ion-option value="portoroz">Portorož</ion-option>
-          <ion-option value="postojna">Postojna</ion-option>
-          <ion-option value="ptuj">Ptuj</ion-option>
-          <ion-option value="radovljica">Radovljica</ion-option>
-          <ion-option value="ravneNaKoroskem" >Ravne na Koroškem</ion-option>
-          <ion-option value="rogaskaSlatina">Rogaška Slatina</ion-option>
-          <ion-option value="sezana">Sežana</ion-option>
-          <ion-option value="slovenjGradec">Slovenj Gradec</ion-option>
-          <ion-option value="slovenskeKonjice">Slovenske Konjice</ion-option>
-          <ion-option value="sentjur">Šentjur</ion-option>
-          <ion-option value="skofjaLoka">Škofja Loka</ion-option>
-          <ion-option value="trbovlje">Trbovlje</ion-option>
-          <ion-option value="trebnje">Trebnje</ion-option>
-          <ion-option value="velenje">Velenje</ion-option>
-          <ion-option value="zagorjeObSavi">Zagorje ob Savi</ion-option>
-          <ion-option value="zalec">Žalec</ion-option>
-        </ion-select>
-      </ion-item>
+  <form (submit)="setDefaults()">
+    <ion-list>
+        <ion-item>
+          <ion-label fixed> Mesto</ion-label>
+          <ion-select [(ngModel)]="mesto" name="mesto" cancelText="Prekliči" okText="Potrdi">
+            <ion-option value="Ajdovščina">Ajdovščina</ion-option>
+            <ion-option value="Bled">Bled</ion-option>
+            <ion-option value="Brežice">Brežice</ion-option>
+            <ion-option value="Celje">Celje</ion-option>
+            <ion-option value="Domžale">Domžale</ion-option>
+            <ion-option value="Hoče">Hoče</ion-option>
+            <ion-option value="Izola">Izola</ion-option>
+            <ion-option value="Jesenice">Jesenice</ion-option>
+            <ion-option value="Kamnik">Kamnik</ion-option>
+            <ion-option value="Koper">Koper</ion-option>
+            <ion-option value="Kranj">Kranj</ion-option> 
+            <ion-option value="Krško">Krško</ion-option> 
+            <ion-option value="Ljubljana">Ljubljana</ion-option>
+            <ion-option value="Ljubljana - Šentvid">Ljubljana - Šentvid</ion-option>
+            <ion-option value="Maribor">Maribor</ion-option>
+            <ion-option value="Mozirje">Mozirje</ion-option>
+            <ion-option value="Murska Sobota">Murska Sobota</ion-option>
+            <ion-option value="Naklo">Naklo</ion-option>
+            <ion-option value="Nova Gorica">Nova Gorica</ion-option>
+            <ion-option value="Novo mesto">Novo mesto</ion-option>
+            <ion-option value="Portorož">Portorož</ion-option>
+            <ion-option value="Postojna">Postojna</ion-option>
+            <ion-option value="Ptuj">Ptuj</ion-option>
+            <ion-option value="Radovljica">Radovljica</ion-option>
+            <ion-option value="Ravne na Koroškem" >Ravne na Koroškem</ion-option>
+            <ion-option value="Rogaška Slatina">Rogaška Slatina</ion-option>
+            <ion-option value="Sežana">Sežana</ion-option>
+            <ion-option value="Slovenj Gradec">Slovenj Gradec</ion-option>
+            <ion-option value="Slovenske Konjice">Slovenske Konjice</ion-option>
+            <ion-option value="Šentjur">Šentjur</ion-option>
+            <ion-option value="Škofja Loka">Škofja Loka</ion-option>
+            <ion-option value="Trbovlje">Trbovlje</ion-option>
+            <ion-option value="Trebnje">Trebnje</ion-option>
+            <ion-option value="Velenje">Velenje</ion-option>
+            <ion-option value="Zagorje ob Savi">Zagorje ob Savi</ion-option>
+            <ion-option value="Žalec">Žalec</ion-option>
+          </ion-select>
+        </ion-item>
+        <!--<ion-item>
+          <ion-label>Vrednost doplačila</ion-label>
+            <ion-range dualKnobs="true" max="5,00" min="0,00" pin="true" color="primary" [(ngModel)]="cena" name="cena" > 
+              <ion-icon range-left small name="cash"> 0,00 €</ion-icon>
+            <ion-icon range-right small name="cash"> 5, 00 €</ion-icon>
+          </ion-range>
+        </ion-item>-->
+    </ion-list>
+    <button ion-button type="submit" full color="primary">Shrani spremembe</button> 
+  </form>
+
       <!--
       <ion-item>
         <ion-label><ion-icon name="pizza"></ion-icon>  Tip hrane</ion-label>
@@ -104,9 +115,6 @@
             <ion-icon range-right small name="star"> 5</ion-icon>
           </ion-range>
       </ion-item>-->
- 
-    </ion-list>
- 
-    <button (click)="findRestaurant()" ion-button full color="primary">Poišči restavracije</button>
+
  
 </ion-content>

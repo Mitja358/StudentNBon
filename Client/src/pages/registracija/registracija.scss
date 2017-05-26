@@ -1,3 +1,40 @@
-page-registracija {
+page-restavracije {
+    div.item-content{
+        float: left;
+    }
+    div.item-buttons{
+        float: right;
+    }  
 
+    #button-ocene{
+        background-color: #311E12;
+    }
+
+    h2{
+        color: #D5D554;
+    }
+
+    .item-md .item-button{
+        width: 100%;
+    }
+
+    #mesto-list{
+        margin: 0px;
+    }
+
+    .searchbar-md {
+        background: #D5D554;
+        padding: 0px;
+    }
+
+    .searchbar-md-searchbar{
+        padding: 0px;
+    }
+
+    #search-mesto{
+        flex: 0 0 50px;
+        width: 50px;
+        min-width: 0px;
+        max-width: 50px;
+    }
 }

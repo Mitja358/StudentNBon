@@ -67,7 +67,8 @@ router.get('/meni/:id', (req, res, next) => {
     });
 });
 
-//@PUT updateMenu
+//@PUT createMenu
+
 router.put('/:id', (req, res, next) => {
     new Meni({ id: req.params.id })
     .fetch({ require:true })
@@ -122,5 +123,23 @@ router.get('/restavracija/:restavracija_id', (req, res, next) => {
     });
 });
 
+//@GET pridobi vse vrste menijev
+router.get('/restavracija/:restavracija_id/vrstaMenija', (req, res, next) => {
+    knex('meni')
+    .select()
+    .distinct('vrstaMenija')
+    .where({'restavracija_id':req.params.restavracija_id})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.status(404).json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
 
 module.exports = router; 

@@ -1,20 +1,78 @@
+<!--
+  Generated template for the RestavracijePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Restavracije</ion-title>
+    <ion-title><img height="70px" src="/img/logo/studentnbon.png" /></ion-title>
+
   </ion-navbar>
     <!--<ion-searchbar
       [(ngModel)]="query"
     </ion-searchbar>-->
-    <ion-searchbar (ionInput)="filter($event)" [showCancelButton]="ShowCancel" placeholder="Poišči restavracijo..."></ion-searchbar>
+  <ion-searchbar (ionInput)="filter($event)" [showCancelButton]="ShowCancel" placeholder="Poišči restavracijo...">  
+  </ion-searchbar>
+    <ion-list id="mesto-list">
+        <ion-item>
+          <ion-label fixed id="search-mesto"> Mesto</ion-label>
+          <ion-select [(ngModel)]="mesto" name="mesto" (ionChange)="spremeniMesto()" cancelText="Prekliči" okText="Potrdi">
+            <ion-option value="Ajdovščina">Ajdovščina</ion-option>
+            <ion-option value="Bled">Bled</ion-option>
+            <ion-option value="Brežice">Brežice</ion-option>
+            <ion-option value="Celje">Celje</ion-option>
+            <ion-option value="Domžale">Domžale</ion-option>
+            <ion-option value="Hoče">Hoče</ion-option>
+            <ion-option value="Izola">Izola</ion-option>
+            <ion-option value="Jesenice">Jesenice</ion-option>
+            <ion-option value="Kamnik">Kamnik</ion-option>
+            <ion-option value="Koper">Koper</ion-option>
+            <ion-option value="Kranj">Kranj</ion-option> 
+            <ion-option value="Krško">Krško</ion-option> 
+            <ion-option value="Ljubljana">Ljubljana</ion-option>
+            <ion-option value="Ljubljana - Šentvid">Ljubljana - Šentvid</ion-option>
+            <ion-option value="Maribor">Maribor</ion-option>
+            <ion-option value="Mozirje">Mozirje</ion-option>
+            <ion-option value="Murska Sobota">Murska Sobota</ion-option>
+            <ion-option value="Naklo">Naklo</ion-option>
+            <ion-option value="Nova Gorica">Nova Gorica</ion-option>
+            <ion-option value="Novo mesto">Novo mesto</ion-option>
+            <ion-option value="Portorož">Portorož</ion-option>
+            <ion-option value="Postojna">Postojna</ion-option>
+            <ion-option value="Ptuj">Ptuj</ion-option>
+            <ion-option value="Radovljica">Radovljica</ion-option>
+            <ion-option value="Ravne na Koroškem" >Ravne na Koroškem</ion-option>
+            <ion-option value="Rogaška Slatina">Rogaška Slatina</ion-option>
+            <ion-option value="Sežana">Sežana</ion-option>
+            <ion-option value="Slovenj Gradec">Slovenj Gradec</ion-option>
+            <ion-option value="Slovenske Konjice">Slovenske Konjice</ion-option>
+            <ion-option value="Šentjur">Šentjur</ion-option>
+            <ion-option value="Škofja Loka">Škofja Loka</ion-option>
+            <ion-option value="Trbovlje">Trbovlje</ion-option>
+            <ion-option value="Trebnje">Trebnje</ion-option>
+            <ion-option value="Velenje">Velenje</ion-option>
+            <ion-option value="Zagorje ob Savi">Zagorje ob Savi</ion-option>
+            <ion-option value="Žalec">Žalec</ion-option>
+          </ion-select>
+        </ion-item>
+    </ion-list>
 </ion-header>
 <ion-content padding>
+
   <ion-list>
-    <ion-item *ngFor="let restavracija of seznamRestavracij">
-      <h2><b>{{restavracija.naziv_restavracije}}</b></h2>
-      <button ion-button item-right (click)="podrobnostiRestavracije(restavracija) ">Več</button> 
-      Naslov: {{restavracija.naslov+ ', ' + restavracija.mesto}} <br/>
-      Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
-      Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 
+    <ion-item text-wrap *ngFor="let restavracija of seznamRestavracij">
+      <div class="item-content"> 
+        <h2><b>{{restavracija.naziv_restavracije}}</b></h2>
+        {{restavracija.naslov+ ', ' + restavracija.mesto}} <br/>
+        Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
+        Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 
+      </div>
+      <div class="item-buttons">
+        <button ion-button item-end id="button-ocene" (click)="podrobnostiRestavracije(restavracija) ">Več</button> <br/>
+        <button ion-button item-end (click)="oceneRestavracij(restavracija) ">Ocene</button> 
+      </div>
     </ion-item>
   </ion-list>
+
 </ion-content>

@@ -1,3 +1,23 @@
 page-podrobnosti {
+    h5{
+        color: #D5D554;
+    }
 
+    #icon-meni{
+        max-width: 60px;
+    }
+
+    #icons-meni{
+        display: inline-flex; 
+        margin: 0px;
+    }
+
+    .item-inner{
+        margin: 0px;
+    }
+
+
+    div.item-buttons{
+        float: right;
+    }  
 }
