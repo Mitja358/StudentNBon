@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-service';
 import { RestavracijePage } from '../restavracije/restavracije';
+<<<<<<< HEAD
 import { TabsPage } from "../tabs/tabs";
+=======
+import { TabsPage } from '../tabs/tabs';
+>>>>>>> f71d5be3f50dcc4bc94f924269b25b8521c9ca2f
 
 @IonicPage()
 @Component({
@@ -22,7 +26,8 @@ export class PrijavaPage {
 
   public prijava() {
     this.pokaziNalaganje()
-    this.avtorizacija.prijava(this.prijavniPodatki).subscribe(allowed => {
+    this.avtorizacija.prijava(this.prijavniPodatki).then(allowed => {
+      //alert(allowed);
       if (allowed) {
         this.navCtrl.setRoot(TabsPage);
       } else {
