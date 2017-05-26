@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-service';
 import { RestavracijePage } from '../restavracije/restavracije';
+import { TabsPage } from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -23,7 +24,7 @@ export class PrijavaPage {
     this.pokaziNalaganje()
     this.avtorizacija.prijava(this.prijavniPodatki).subscribe(allowed => {
       if (allowed) {
-        this.navCtrl.setRoot(RestavracijePage);
+        this.navCtrl.setRoot(TabsPage);
       } else {
         this.pokaziNapako("Dostop zavrnjen!");
       }
