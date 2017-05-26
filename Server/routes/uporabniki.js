@@ -109,17 +109,27 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
-router.get('/prijava/:email&:geslo', (req, res, next) => {
+router.post('/prijava', (req, res, next) => {
+   // console.log(req.body.email);
     knex('uporabnik')
     .select('email', 'geslo')
-    .where({'email':req.params.email}).andWhere({'geslo':req.params.geslo})
+    .where({'email':req.body.email}).andWhere({'geslo':req.body.geslo})
     .then((data) => {
-        if (data) {
-            res.json(data);
+        //console.log(data[0].email);
+        console.log(data);
+        /*if (data) {
+           // console.log(req.params.email);
+            res.json(true);
         }
         else {
-            res.json(err);
-        }
+           // console.log(req.params.email);
+            res.json(false);
+        }*/
+        if(data.length == 0)
+            res.json(false)
+        else
+            res.json(true)
+        
     })
     .catch((err) => {
         res.json(err);

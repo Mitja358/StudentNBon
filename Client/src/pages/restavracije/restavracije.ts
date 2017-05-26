@@ -22,6 +22,7 @@ export class RestavracijePage {
     let loadingPopup = this.loadingCtrl.create({
       content: 'Nalaganje restavracij...'
     });
+  
     this.http.get('http://localhost:3000/restavracije/')
         .map(res => res.json()).subscribe(data => {this.posts = data;})
     this.initializeItems();

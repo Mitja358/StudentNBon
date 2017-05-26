@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import 'rxjs/Rx';
 
 export class Uporabnik {
   ime: string;
@@ -24,70 +25,47 @@ export class Uporabnik {
 @Injectable()
 export class AvtorizacijaServiceProvider {
   trenutniUporabnik: Uporabnik;
-  private url: string = "http://localhost:3000/uporabniki";
-  seznamUporabnikov = [];
+  private url: string = "http://localhost:3000/";
 
-  constructor(private http: Http) {
-    this.getEmail();
-    this.getGeslo();
-  }
-
-  getEmail(){
-    return this.http.get(this.url)
-    .map(this.extractData)
-    .do(this.logResponse)
-    .catch(this.catchError);
-  }
-
-  getGeslo(){
-    return this.http.get(this.url)
-    .map(this.extractData2)
-    .do(this.logResponse)
-    .catch(this.catchError);
-  }
-
-  private catchError(error: Response | any) {
-    console.log(error);
-    return Observable.throw(error.json().error || "Server error.");
-  }
-
-  private logResponse(res: Response) {
-    console.log(res);
-  }
-
-  private extractData(res: Response) {
-    let podatki = res.json();
-    let podatki2 = podatki[0].email;
-    return podatki2;
-  }
-
-  private extractData2(res: Response) {
-    let podatki = res.json();
-    let podatki2 = podatki[0].geslo;
-    return podatki2;
-  }
+  constructor(private http: Http) { }  
 
   public prijava(prijavni_podatki) {
     if (prijavni_podatki.email === null || prijavni_podatki.geslo === null) {
       // Observable lahko nadomestijo HTTP klici 
-      return Observable.throw("Prosimo vnesite podatke za prijavo");
+     // return Observable.throw("Prosimo vnesite podatke za prijavo");
     } else {
-      return Observable.create(observer => {
-        //this.seznamUporabnikov = data
-        this.getEmail().subscribe(data => {
-          this.seznamUporabnikov = data
-          let nekaj = data;
-          console.log("MAIL: " + this.seznamUporabnikov);
+        let headers = new Headers({
+          'Content-Type': 'application/json'
+        });
+        let options = new RequestOptions({
+          headers: headers
+        });
+        let body = {
+          email: prijavni_podatki.email,
+          geslo: prijavni_podatki.geslo
+        };
+        return this.http.post(this.url + 'uporabniki/prijava', body)
+          .toPromise()
+          .then(response => {
+            console.log(response.json())
+            return response.json()}, this.handleError);
 
-        // Implementacija realnega preverjanja (store a token?)
-        let dostop = (prijavni_podatki.geslo === "geslo" && prijavni_podatki.email === this.seznamUporabnikov);
+
+//**************** RAZBIJ NA 2 FUNKCIJI!!! */
+          // Implementacija realnega preverjanja (store a token?)
+        /*
+        let dostop = (prijavni_podatki.geslo === "geslo" && prijavni_podatki.email === "email");
       
         this.trenutniUporabnik = new Uporabnik('Mitja', 'mitja.bernjak@gmail.com');
         observer.next(dostop);
         observer.complete();
-        })
-      });
+        */
     }
+  }
+
+  handleError(error) {
+    console.log(error);
+    return error.json().message || 'Server error.';
   }
 
   public registracija(registracijski_podatki) {
