@@ -1,25 +1,47 @@
 page-prijava {
+
     .login-content {
         background-color: #D5D554;
     }
 
-    .logo-row{
-        padding-top: 60px;
+    .logo-row {
+        padding-top: 50px;
         padding-bottom: 20px;
     }
 
-    .login-box{
-        border-radius: 10px;
-        background-color: #311E12;
-        padding: 20px 20px 0px 20px;
-        margin-top: 10px;
+    .login-box {
+        border-radius: 5px;
+        background-color: darkgoldenrod;
+        padding: 0px 5px 0px 5px;
+        margin-top: 20px;
     }
 
-    ion-col{
+     .submit-btn {
+         background: #f53d3d;
+         border-radius: 5px !important;
+     }
+
+    .register-btn {
+        color: #ffffff;
+        font-size: 0.8em;
+    }
+
+    ion-row {
+        align-items: center;
         text-align: center;
     }
 
-    img{
+    ion-item {
+        border-radius: 5px !important;
+        padding-left: 55px !important;
+        margin-bottom: 5px !important;
+    }
+
+    ion-col {
+        text-align: center;
+    }
+
+    img {
         width:70%;
     }
 }
