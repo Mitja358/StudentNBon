@@ -5,13 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar color="primary"> 
-    <ion-title>Zemljevid restavracije<br/>{{restavracija.naziv_restavracije}}</ion-title>
+    <ion-title>Zemljevid restavracije<br/>{{restavracija.naziv_restavracije}} - {{restavracija.naslov}}, {{restavracija.mesto}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <div #map id="map"></div>
 </ion-content>
