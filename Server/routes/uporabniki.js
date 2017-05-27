@@ -94,7 +94,6 @@ router.put('/:id', (req, res, next) => {
     });
 });
 
-//@DELETE deleteRestaurant 
 router.delete('/:id', (req, res, next) => {
     new Uporabnik({ id: req.params.id })
     .fetch({ require: true })

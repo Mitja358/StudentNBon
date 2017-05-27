@@ -15,7 +15,7 @@ import { PrijavaPage } from '../pages/prijava/prijava';
 export class MyApp {
 
   // Pri zagonu aplikacije se pokaže ta stran (trenutno je prazna stran)
-  rootPage:any = PrijavaPage;
+  rootPage:any = PrijavaPage; 
   //loader: any;
 
 /*
