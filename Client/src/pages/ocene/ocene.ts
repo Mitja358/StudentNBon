@@ -16,25 +16,38 @@ import { OceneServiceProvider } from "../../providers/ocene-service";
 
 export class OcenePage {
   restavracija: any; 
-  seznamOcen = []; 
-
-  novaOcena = {uporabnik_id: '', komentar: '', stOcena: '' };
+  seznamOcen = [];
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, private oceneService: OceneServiceProvider) {
     this.restavracija = navParams.get('restavracija');
     this.getOcene(this.restavracija);
   }
 
+  ocena = {datum: '', stOcena: '', komentar: '', vrstaOcena:'', restavracija_id: '', uporabnik_id: ''};
+
   getOcene(restavracija){
       this.oceneService.getOcene(restavracija).subscribe(data => this.seznamOcen = data);
   }
 
-  addOcena() {   
-    console.log(this.novaOcena); 
-  }
+  //Dodajanje restavracije v bazo
+  addOcena(ocena){
+      console.log(this.ocena);  
+      this.oceneService.addOcena(this.ocena); 
+  };
+  
+  //Brisanje iz baze
+  deleteOcena(ocena){
+    let index = this.seznamOcen.indexOf(ocena);
+    
+      if(index > -1){
+        this.seznamOcen.splice(index, 1);
+      }   
+
+    this.oceneService.deleteReview(ocena.id);
+  } 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OcenePage');
+    console.log('ionViewDidLoad OcenePage');  
   }
 
 }

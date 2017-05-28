@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //import { LoadingController } from 'ionic-angular';
 
-//import { TabsPage } from '../pages/tabs/tabs';
+import { TabsPage } from '../pages/tabs/tabs';
 import { PrijavaPage } from '../pages/prijava/prijava';
 //import { AvtorizacijaProvider } from '../providers/avtorizacija/avtorizacija';
 
@@ -15,7 +15,8 @@ import { PrijavaPage } from '../pages/prijava/prijava';
 export class MyApp {
 
   // Pri zagonu aplikacije se pokaže ta stran (trenutno je prazna stran)
-  rootPage:any = PrijavaPage; 
+  //rootPage:any = PrijavaPage; 
+  rootPage:any = TabsPage; 
   //loader: any;
 
 /*
