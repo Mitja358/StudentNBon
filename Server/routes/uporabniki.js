@@ -109,6 +109,7 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
+// Preverjanje prijave
 router.post('/prijava', (req, res, next) => {
    // console.log(req.body.email);
     knex('uporabnik')

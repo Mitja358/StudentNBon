@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, Loading, LoadingController, AlertController } from 'ionic-angular';
+
 import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-service';
-import { RestavracijePage } from '../restavracije/restavracije';
 import { TabsPage } from "../tabs/tabs";
+
+let email_local = localStorage.getItem("email");
+let geslo_local = localStorage.getItem("geslo");
 
 @IonicPage()
 @Component({
@@ -10,29 +13,39 @@ import { TabsPage } from "../tabs/tabs";
   templateUrl: 'prijava.html',
 })
 
-export class PrijavaPage {
+export class PrijavaPage {  
   loading: Loading;
   prijavniPodatki = { email: '', geslo: '' };
 
   constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
-
+  
   public ustvariRacun() {
     this.navCtrl.push('RegistracijaPage');
   }
 
+  // Preverja vrednost localStorage
+  ionViewDidLoad() {    
+    if (email_local !== null) {
+      console.log("DidLoad: " + email_local);
+      this.navCtrl.push(TabsPage);
+    } 
+  }
+
   public prijava() {
+    console.log("LocalStorage1: " + email_local + ", " + geslo_local);
+
     this.pokaziNalaganje()
     this.avtorizacija.prijava(this.prijavniPodatki).then(allowed => {
-      //alert(allowed);
+
       if (allowed) {
         this.navCtrl.setRoot(TabsPage);
       } else {
-        this.pokaziNapako("Dostop zavrnjen!");
+        this.pokaziNapako("Neveljavni podatki za prijavo!");
       }
     },
-      error => {
-        this.pokaziNapako(error);
-      });
+    error => {
+      this.pokaziNapako('error');
+    });
   }
 
   pokaziNalaganje() {

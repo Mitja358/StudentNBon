@@ -47,7 +47,15 @@ export class AvtorizacijaServiceProvider {
         return this.http.post(this.url + 'uporabniki/prijava', body)
           .toPromise()
           .then(response => {
-            console.log(response.json())
+            console.log(response.json());
+            if (response.json() == true) {
+              localStorage.removeItem("email");
+              localStorage.removeItem("geslo");
+              localStorage.email = prijavni_podatki.email;
+              localStorage.geslo = prijavni_podatki.geslo;
+            } else { 
+              // Naredi nekaj
+             }
             return response.json()}, this.handleError);
 
 
