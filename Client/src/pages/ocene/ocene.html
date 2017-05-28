@@ -15,18 +15,11 @@
 <ion-content padding>
   <form (ngSubmit)="addOcena()" #komentar="ngForm">
     <ion-list no-lines>
-    <ion-item>
-      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="ocena.datum" name="datum"></ion-datetime>
-    </ion-item>
-      <ion-item>
-        <ion-range [(ngModel)]="ocena.stOcena" min="0" max="5" pin="true" name="stOcena"> <!--[(ngModel)]="novaOcena.stOcena"-->
-          <ion-icon range-left name=""><img height="20px" src="/img/ocena/star-lightgreen.png" /></ion-icon>
-          <ion-icon range-right name=""><img height="20px" src="/img/ocena/star-green.png" /></ion-icon>
-        </ion-range>
-      </ion-item>
+    <ion-card>
       <ion-item>
         <ion-textarea [(ngModel)]="ocena.komentar" placeholder="Ocenite restavracijo" name="komentar" required></ion-textarea> <!-- [(ngModel)]="novaOcena.komentar"-->
       </ion-item>
+    </ion-card>
       <ion-item>
         <ion-label>Vrsta ocene</ion-label>
         <ion-select [(ngModel)]="ocena.vrstaOcena" name="vrstaOcena" cancelText="Prekliči" okText="Potrdi">
@@ -37,16 +30,15 @@
             <!--<ion-option value="vse">Vse</ion-option>-->
         </ion-select>
       </ion-item>
-      <ion-item> 
-        <ion-input [(ngModel)]="ocena.uporabnik_id" type="number" placeholder="ID uporabnika" name="uporabnik_id" required></ion-input> <!--[(ngModel)]="novaOcena.uporabnik_id"-->
-      </ion-item>
-      <ion-item> 
-        <ion-input [(ngModel)]="ocena.restavracija_id" type="number" placeholder="ID restavracije" name="restavracija_id" required></ion-input> <!--[(ngModel)]="novaOcena.uporabnik_id"-->
+      <ion-item>
+        <ion-range [(ngModel)]="ocena.stOcena" min="0" max="5" pin="true" name="stOcena"> <!--[(ngModel)]="novaOcena.stOcena"-->
+          <ion-icon range-left name=""><img height="20px" src="/img/ocena/star-lightgreen.png" /></ion-icon>
+          <ion-icon range-right name=""><img height="20px" src="/img/ocena/star-green.png" /></ion-icon>
+        </ion-range>
       </ion-item>
     </ion-list>
     <button ion-button class="submit-btn" full type="submit" [disabled]="!komentar.form.valid">Oddaj oceno</button>
   </form>
-  
 
   <ion-list>
     <ion-item text-wrap *ngFor="let restavracija of seznamRestavracij">
