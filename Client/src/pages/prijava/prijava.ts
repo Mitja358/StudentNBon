@@ -5,7 +5,10 @@ import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-servic
 //import { RestavracijePage } from '../restavracije/restavracije';
 import { TabsPage } from "../tabs/tabs";
 
-let email_local = localStorage.getItem("email");
+// Za testiranje localStorage odkomentiraj naslednji 2 vrstici, poženi app in spet zakomentiraj! 
+//localStorage.removeItem("upIme");
+//localStorage.removeItem("geslo");
+let upIme_local = localStorage.getItem("upIme");
 let geslo_local = localStorage.getItem("geslo");
 
 @IonicPage()
@@ -16,7 +19,7 @@ let geslo_local = localStorage.getItem("geslo");
 
 export class PrijavaPage {  
   loading: Loading;
-  prijavniPodatki = { email: '', geslo: '' };
+  prijavniPodatki = { upIme: '', geslo: '' };
 
   constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
   
@@ -26,14 +29,14 @@ export class PrijavaPage {
 
   // Preverja vrednost localStorage
   ionViewDidLoad() {    
-    if (email_local !== null) {
-      console.log("DidLoad: " + email_local);
+    if (upIme_local !== null) {
+      console.log("DidLoad: " + upIme_local);
       this.navCtrl.push(TabsPage);
     } 
   }
 
   public prijava() {
-    console.log("LocalStorage1: " + email_local + ", " + geslo_local);
+    console.log("LocalStorage1: " + upIme_local + ", " + geslo_local);
 
     this.pokaziNalaganje()
     this.avtorizacija.prijava(this.prijavniPodatki).then(allowed => {

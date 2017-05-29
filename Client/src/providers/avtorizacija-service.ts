@@ -8,11 +8,11 @@ import 'rxjs/Rx';
 
 export class Uporabnik {
   ime: string;
-  email: string;
+  upIme: string;
 
-  constructor(ime: string, email: string) {
+  constructor(ime: string, upIme: string) {
     this.ime = ime;
-    this.email = email;
+    this.upIme = upIme;
   }
 }
 
@@ -30,7 +30,7 @@ export class AvtorizacijaServiceProvider {
   constructor(private http: Http) { }  
 
   public prijava(prijavni_podatki) {
-    if (prijavni_podatki.email === null || prijavni_podatki.geslo === null) {
+    if (prijavni_podatki.upIme === null || prijavni_podatki.geslo === null) {
       // Observable lahko nadomestijo HTTP klici 
      // return Observable.throw("Prosimo vnesite podatke za prijavo");
     } else {
@@ -41,7 +41,7 @@ export class AvtorizacijaServiceProvider {
           headers: headers
         });
         let body = {
-          email: prijavni_podatki.email,
+          upIme: prijavni_podatki.upIme,
           geslo: prijavni_podatki.geslo
         };
         return this.http.post(this.url + 'uporabniki/prijava', body)
@@ -49,9 +49,9 @@ export class AvtorizacijaServiceProvider {
           .then(response => {
             console.log(response.json());
             if (response.json() == true) {
-              localStorage.removeItem("email");
+              localStorage.removeItem("upIme");
               localStorage.removeItem("geslo");
-              localStorage.email = prijavni_podatki.email;
+              localStorage.upIme = prijavni_podatki.upIme;
               localStorage.geslo = prijavni_podatki.geslo;
             } else { 
               // Naredi nekaj
@@ -77,7 +77,7 @@ export class AvtorizacijaServiceProvider {
   }
 
   public registracija(registracijski_podatki) {
-    if (registracijski_podatki.email === null || registracijski_podatki.geslo === null) {
+    if (registracijski_podatki.upIme === null || registracijski_podatki.geslo === null) {
       return Observable.throw("Prosimo vnesite podatke za registracijo");
     } else {
       return Observable.create(observer => {
