@@ -37,7 +37,6 @@ export class MyApp {
     this.loader.present();
   }
 */
->>>>>>> 0d269127fa1c77e2b8b83521637f1fe06d0a9b69
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
