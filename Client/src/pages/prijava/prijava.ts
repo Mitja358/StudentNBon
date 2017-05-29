@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, Loading, LoadingController, AlertController } from 'ionic-angular';
 
 import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-service';
+//import { RestavracijePage } from '../restavracije/restavracije';
 import { TabsPage } from "../tabs/tabs";
 
 let email_local = localStorage.getItem("email");

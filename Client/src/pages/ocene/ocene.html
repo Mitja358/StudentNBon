@@ -4,6 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
 <ion-header>
 
   <ion-navbar color="primary">
@@ -55,36 +56,37 @@
     </ion-item>
   </ion-list>
 
-
-
   <ion-list>
     <ion-item text-wrap *ngFor="let ocena of seznamOcen">
       <div class="item-content"> 
         Uporabnik {{ocena.uporabnik_id}}, {{ocena.datum}} <br/>
         <ion-icon item-right> <img height="30px" src="/img/icons/vrstaOcene/{{ocena.vrstaOcena}}.png" /> </ion-icon>
-        <ion-icon *ngIf="ocena.stOcena == 5" name="">
+        <ion-icon *ngIf="ocena.stOcena == 5" name="stOcena5">
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
-        <ion-icon *ngIf="ocena.stOcena == 4" name="">
+
+        <ion-icon *ngIf="ocena.stOcena == 4" name="stOcena4">
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
-        <ion-icon *ngIf="ocena.stOcena == 3" name="">
+
+        <ion-icon *ngIf="ocena.stOcena == 3" name="stOcena3">
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
-        <ion-icon *ngIf="ocena.stOcena == 2" name="">
+
+        <ion-icon *ngIf="ocena.stOcena == 2" name="stOcena2">
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
-        <ion-icon *ngIf="ocena.stOcena == 1" name="">
+        <ion-icon *ngIf="ocena.stOcena == 1" name="stOcena1">
           <img height="20px" src="/img/ocena/star-green.png" />
         </ion-icon><br/>
         {{ocena.komentar}}
