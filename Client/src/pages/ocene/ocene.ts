@@ -17,11 +17,13 @@ import { OceneServiceProvider } from "../../providers/ocene-service";
 export class OcenePage {
   restavracija: any; 
   seznamOcen = [];
+  ocena : any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, private oceneService: OceneServiceProvider) {
     this.restavracija = navParams.get('restavracija');
     this.getOcene(this.restavracija);
     this.getRestavracijaId(this.restavracija); 
+    this.ocena = {datum: '', stOcena: '', komentar: '', vrstaOcena:'', restavracija_id: this.restavracija.id, uporabnik_id: ''};
   }
 
   getOcene(restavracija){
@@ -32,8 +34,6 @@ export class OcenePage {
     console.log(restavracija.id); 
     return restavracija.id; 
   } 
-
-  ocena = {datum: '', stOcena: '', komentar: '', vrstaOcena:'', restavracija_id: '' , uporabnik_id: ''};
 
   //Dodajanje ocene v bazo
   addOcena(ocena){
