@@ -1,7 +1,10 @@
 import { Component} from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController  } from 'ionic-angular'; //AlertController
+
 import { RestavracijeServiceProvider } from "../../providers/restavracije-service";
 import { RestavracijePage } from '../../pages/restavracije/restavracije';
+import { PrijavaPage } from '../../pages/prijava/prijava';
+import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-service';
 
 @IonicPage()
 @Component({
@@ -10,11 +13,9 @@ import { RestavracijePage } from '../../pages/restavracije/restavracije';
 })
 
 export class NastavitvePage {
-  
   private mesto: any; 
   
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private restavracijeService: RestavracijeServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private restavracijeService: RestavracijeServiceProvider, private avtorizacija: AvtorizacijaServiceProvider) {
     this.getDefaults();  
   }
 
@@ -31,4 +32,12 @@ export class NastavitvePage {
     this.navCtrl.push(RestavracijePage);
   }
 
+  odjava() {
+    //this.avtorizacija.odjava().subscribe(success => {
+      localStorage.removeItem("upIme");
+      localStorage.removeItem("geslo");
+      this.navCtrl.push(PrijavaPage);
+      console.log("Odjava");
+    //});
+  }
 };
