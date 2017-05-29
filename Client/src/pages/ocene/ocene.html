@@ -1,10 +1,3 @@
-<!--
-  Generated template for the OcenePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 <ion-header>
 
   <ion-navbar color="primary">
@@ -18,12 +11,12 @@
     <ion-list no-lines>
     <ion-card>
       <ion-item>
-        <ion-textarea [(ngModel)]="ocena.komentar" placeholder="Ocenite restavracijo" name="komentar" required></ion-textarea> <!-- [(ngModel)]="novaOcena.komentar"-->
+        <ion-textarea [(ngModel)]="ocena.komentar" placeholder="Ocenite restavracijo" name="komentar" required></ion-textarea>
       </ion-item>
     </ion-card>
       <ion-item>
         <ion-label>Vrsta ocene</ion-label>
-        <ion-select [(ngModel)]="ocena.vrstaOcena" name="vrstaOcena" cancelText="Prekliči" okText="Potrdi">
+        <ion-select [(ngModel)]="ocena.vrstaOcena" name="vrstaOcena" cancelText="Prekliči" okText="Potrdi" required>
             <ion-option value="hrana">Hrana</ion-option>
             <ion-option value="postrezba">Postrežba</ion-option>
             <ion-option value="cena">Cena</ion-option>
@@ -32,13 +25,13 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-range [(ngModel)]="ocena.stOcena" min="0" max="5" pin="true" name="stOcena"> <!--[(ngModel)]="novaOcena.stOcena"-->
+        <ion-range [(ngModel)]="ocena.stOcena" min="0" max="5" pin="true" name="stOcena" required> 
           <ion-icon range-left name=""><img height="20px" src="/img/ocena/star-lightgreen.png" /></ion-icon>
           <ion-icon range-right name=""><img height="20px" src="/img/ocena/star-green.png" /></ion-icon>
         </ion-range>
       </ion-item>
     </ion-list>
-    <button ion-button class="submit-btn" full type="submit" [disabled]="!komentar.form.valid">Oddaj oceno</button>
+    <button ion-button class="submit-btn" full type="submit" [disabled]="!komentar.form.valid">Oceni restavracijo {{restavracija.naziv_restavracije}}</button>
   </form>
 
   <ion-list>

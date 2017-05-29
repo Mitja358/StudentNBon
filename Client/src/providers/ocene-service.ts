@@ -4,35 +4,33 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Observable} from 'rxjs/Observable';
-
-
 import 'rxjs/Rx';
  
-
-/*
-  Generated class for the MenijiServiceProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
-
 @Injectable()
 export class OceneServiceProvider {
 
-  private url: string = "http://localhost:3000/ocene/restavracija";
+  private url: string = "http://localhost:3000/ocene/";
 
   constructor(public http: Http) {
     console.log('Hello OceneServiceProvider Provider');
   }
 
   getOcene(restavracija){
-    return this.http.get(this.url + "/" + restavracija.id)
+    return this.http.get(this.url + "restavracija/" + restavracija.id)
     .do(this.logResponse)
     .map(this.extractData)
     .do(this.logResponse) 
     .catch(this.catchError)
   }
-  
+
+  getPovprecnoOceno(restavracija){
+    return this.http.get(this.url + "povprecnaOcena/" + restavracija.id)
+    .do(this.logResponse)
+    .map(this.extractData)
+    .do(this.logResponse) 
+    .catch(this.catchError)
+  } 
+
   private catchError(error: Response | any){
     console.log(error);
     return Observable.throw(error.json().error || "Server error");
@@ -46,10 +44,7 @@ export class OceneServiceProvider {
     return res.json();
   }
 
-addOcena(data) { 
-  //if (data.datum === null || data.stOcena === null || data.komentar === null || data.vrstaOcena === null || data.restavracija_id === null || data.uporabnik_id === null) {
-    //console.log("Vnesite vse podatke!");
-  //} else {
+  addOcena(data) { 
       let body = JSON.stringify(data);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
@@ -60,13 +55,12 @@ addOcena(data) {
         }, error => {
             console.log("Oooops!");
         });
-    //}
   }
   
-deleteReview(id){ 
-  this.http.delete('http://localhost:3000/ocene/' + id).subscribe((res) => {
-    console.log(res.json());
-  });    
-}
+  deleteReview(id){ 
+    this.http.delete('http://localhost:3000/ocene/' + id).subscribe((res) => {
+      console.log(res.json());
+    });    
+  }
  
 }

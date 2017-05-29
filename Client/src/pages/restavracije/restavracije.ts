@@ -22,20 +22,16 @@ export class RestavracijePage {
   
   private mesto: any; 
   private posts: any;
-  private seznamRestavracij: any; 
-  
+  private seznamRestavracij: any;   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private loadingCtrl: LoadingController, private restavracijeService: RestavracijeServiceProvider) {
     //this.mesto = this.navParams.get('mesto');
     this.getDefaults();
-    
-
-
+  
     // Pokaži sporočila ob nalaganju
     let loadingPopup = this.loadingCtrl.create({
       content: 'Nalaganje restavracij...'
     });
-
 
     this.http.get('http://localhost:3000/restavracije/kraj/' + this.mesto)
         .map(res => res.json()).subscribe(data => {this.posts = data;})
@@ -63,10 +59,8 @@ export class RestavracijePage {
   }
 
   getRestavracije(mesto){
-    //this.restavracijeService.getRestavracije().subscribe(data => console.log(data));
     this.restavracijeService.getRestavracije(mesto).subscribe(data => this.seznamRestavracij = data);
   }
-
 
   //navCtrl --> prehajanje med stranmi
   podrobnostiRestavracije(restavracija){ 
@@ -101,13 +95,6 @@ export class RestavracijePage {
     }
   }
 
-
-
-
-
-
-
-
 /*NE DELUJOČE FILTRIRANJE
   filter2(originalData, query) {
     var filtered = [];
@@ -127,6 +114,7 @@ export class RestavracijePage {
     
   ionViewDidLoad() {
     console.log('ionViewDidLoad RestavracijePage');
+    
   }
 
 };

@@ -4,26 +4,29 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
-/*
-  Generated class for the MenijiServiceProvider provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class MenijiServiceProvider {
 
   private url: string = "http://localhost:3000/meniji/restavracija";
-
+  
   constructor(public http: Http) {
     console.log('Hello MenijiServiceProvider Provider');
   }
 
   getMenije(restavracija){
     return this.http.get(this.url + "/" + restavracija.id)
-    .do(this.logResponse) //.do((res: Response) => console.log(res))
-    .map(this.extractData) //.map((res: Response) => res.json());
-    .do(this.logResponse) //.do((res: Response) => console.log(res))
+    .do(this.logResponse)
+    .map(this.extractData) 
+    .do(this.logResponse) 
+    .catch(this.catchError)
+  }
+
+  getTipPrehrane(restavracija){
+    return this.http.get(this.url + "/" + restavracija.id + "/vrstaMenija")
+    .do(this.logResponse)
+    .map(this.extractData) 
+    .do(this.logResponse) 
     .catch(this.catchError)
   }
 

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MenijiServiceProvider } from "../../providers/meniji-service";
 import { VrstaMenijaServiceProvider } from "../../providers/vrstamenija-service";
 import { ZemljevidPage } from "../zemljevid/zemljevid";
+import { OceneServiceProvider } from "../../providers/ocene-service";
 
 /**
  * Generated class for the PodrobnostiPage page.
@@ -20,12 +21,14 @@ export class PodrobnostiPage {
 
   restavracija: any;
   seznamMenijev = [];
-  tipiMenijev =[];
+  tipiMenijev = [];
+  povprecnaOcena: any; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menijiService: MenijiServiceProvider, private vrstaMenijaService: VrstaMenijaServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menijiService: MenijiServiceProvider, private oceneService: OceneServiceProvider) {
     this.restavracija = navParams.get('restavracija'); 
     this.getMenije(this.restavracija);
     this.getTipPrehrane(this.restavracija);
+    this.getPovprecnoOceno(this.restavracija);
   }
 
   getMenije(restavracija){
@@ -33,7 +36,11 @@ export class PodrobnostiPage {
   }
 
   getTipPrehrane(restavracija){
-    this.vrstaMenijaService.getTipPrehrane(restavracija).subscribe(tip => this.tipiMenijev = tip);
+    this.menijiService.getTipPrehrane(restavracija).subscribe(tip => this.tipiMenijev = tip);
+  }
+
+  getPovprecnoOceno(restavracija){
+    this.oceneService.getPovprecnoOceno(restavracija).subscribe(povprecje => this.povprecnaOcena = povprecje);
   }
 
   prikazZemljevida(restavracija){

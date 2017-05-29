@@ -108,6 +108,23 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
+router.get('/upime/:upIme', (req, res, next) => {
+    knex('uporabnik')
+    .select('id')
+    .where({'upIme':req.params.upIme})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.status(404).json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
+
 // Preverjanje prijave
 router.post('/prijava', (req, res, next) => {
    // console.log(req.body.email);

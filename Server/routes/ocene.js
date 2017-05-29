@@ -127,4 +127,37 @@ router.get('/restavracija/:restavracija_id', (req, res, next) => {
         res.json(err);
     });
 });
+
+router.get('/stOcen/:restavracija_id', (req, res, next) => {
+    knex('ocena')
+    .count('id')
+    .where({'restavracija_id':req.params.restavracija_id})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.status(404).json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
+
+router.get('/povprecnaOcena/:restavracija_id', (req, res, next) => {
+    knex.avg('stOcena as povprecje').from('ocena').where({'restavracija_id':req.params.restavracija_id})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.status(404).json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
+
 module.exports = router; 

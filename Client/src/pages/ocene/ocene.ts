@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import { OceneServiceProvider } from "../../providers/ocene-service";
 
-/**
- * Generated class for the OcenePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-ocene',
@@ -23,8 +18,19 @@ export class OcenePage {
     this.restavracija = navParams.get('restavracija');
     this.getOcene(this.restavracija);
     //this.getRestavracijaId(this.restavracija); 
+    //this.getUporabnik(); 
 
-    this.ocena = {datum: '', stOcena: '', komentar: '', vrstaOcena:'', restavracija_id: this.restavracija.id, uporabnik_id: ''};
+    let upIme = localStorage.getItem('upIme');
+
+    function getDatum() {
+      var date = new Date();
+      var datumNow = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
+      return datumNow;
+    }
+
+    let idRestavracije = this.restavracija.id; 
+
+    this.ocena = {datum: getDatum(), stOcena: '', komentar: '', vrstaOcena:'', restavracija_id: idRestavracije, uporabnik_id: '1'};
   }
 
   getOcene(restavracija){
@@ -34,16 +40,19 @@ export class OcenePage {
   /* getRestavracijaId(restavracija){
     console.log(restavracija.id); 
     return restavracija.id; 
+  }
+
+  getUporabnik(){
+    let upIme = localStorage.getItem('upIme');
   }*/
 
-  //Dodajanje ocene v bazo
-  addOcena(ocena){
-      this.ocena.datum= new Date();     
+  addOcena(ocena, restavracija){
       console.log(this.ocena);  
       this.oceneService.addOcena(this.ocena); 
+      this.getOcene(this.restavracija);
   };
 
-  //Brisanje
+ 
   deleteOcena(ocena){
     let index = this.seznamOcen.indexOf(ocena);
     
