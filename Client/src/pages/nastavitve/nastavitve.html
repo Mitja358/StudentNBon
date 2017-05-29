@@ -3,7 +3,6 @@
   <ion-navbar color="primary">
     <ion-title>Nastavitve</ion-title>
   </ion-navbar>
-
 </ion-header>
  
 <ion-content padding>
@@ -61,6 +60,14 @@
     </ion-list>
     <button ion-button type="submit" full color="primary">Shrani spremembe</button> 
   </form>
+  <br /><br/><br />
+  <!--Prijavljen si kot: {{uporabnoskoIme}} -->
+  <ion-buttons end>
+      <button ion-button class="logout-btn" (click)="odjava()">
+        Odjavi se
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
 
       <!--
       <ion-item>

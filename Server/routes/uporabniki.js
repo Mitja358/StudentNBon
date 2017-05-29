@@ -132,21 +132,11 @@ router.post('/prijava', (req, res, next) => {
     .select('upIme', 'geslo')
     .where({'upIme':req.body.upIme}).andWhere({'geslo':req.body.geslo})
     .then((data) => {
-        //console.log(data[0].email);
         console.log(data);
-        /*if (data) {
-           // console.log(req.params.email);
-            res.json(true);
-        }
-        else {
-           // console.log(req.params.email);
-            res.json(false);
-        }*/
         if(data.length == 0)
             res.json(false)
         else
             res.json(true)
-        
     })
     .catch((err) => {
         res.json(err);
