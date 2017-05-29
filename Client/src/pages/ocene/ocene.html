@@ -56,8 +56,6 @@
     </ion-item>
   </ion-list>
 
-
-
   <ion-list>
     <ion-item text-wrap *ngFor="let ocena of seznamOcen">
       <div class="item-content"> 
@@ -70,17 +68,20 @@
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
+
         <ion-icon *ngIf="ocena.stOcena == 4" name="stOcena4">
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
+
         <ion-icon *ngIf="ocena.stOcena == 3" name="stOcena3">
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
+
         <ion-icon *ngIf="ocena.stOcena == 2" name="stOcena2">
           <img height="20px" src="/img/ocena/star-green.png" />
           <img height="20px" src="/img/ocena/star-green.png" />

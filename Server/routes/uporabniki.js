@@ -108,11 +108,12 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
+// Preverjanje prijave
 router.post('/prijava', (req, res, next) => {
    // console.log(req.body.email);
     knex('uporabnik')
-    .select('email', 'geslo')
-    .where({'email':req.body.email}).andWhere({'geslo':req.body.geslo})
+    .select('upIme', 'geslo')
+    .where({'upIme':req.body.upIme}).andWhere({'geslo':req.body.geslo})
     .then((data) => {
         //console.log(data[0].email);
         console.log(data);

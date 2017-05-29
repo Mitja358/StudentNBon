@@ -24,7 +24,7 @@ export class ZemljevidPage {
   map: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.restavracija = navParams.get('restavracija'); 
+    this.restavracija = navParams.get('restavracija');
   }
 
   ionViewDidLoad() {
@@ -33,6 +33,31 @@ export class ZemljevidPage {
   }
 
   initMap() {
+    let directionsService = new google.maps.DirectionsService;
+    let directionsDisplay = new google.maps.DirectionsRenderer;
+    let mapOptions = {
+      zoom: 18,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    directionsDisplay.setMap(this.map);
+
+    calculateAndDisplayRoute(directionsService, directionsDisplay, this.restavracija.naslov, this.restavracija.mesto);
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay, naslov, mesto) {
+      directionsService.route({
+        origin: 'Murska Sobota',
+        destination: naslov + mesto,
+        travelMode: 'DRIVING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+        } else {
+          alert('Napaka pri pridobivanju napotkov. Koda napake: ' + status);
+        }
+      });
+    }
+
     this.geocoder.geocode ({ 'address' : this.restavracija.naslov + ', ' + this.restavracija.mesto }, (destinations, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         this.map.setCenter(destinations[0].geometry.location);
@@ -50,17 +75,9 @@ export class ZemljevidPage {
         marker.addListener('click', function() {
           label.open(this.map, marker);
         });
-
       } else {
         alert ('Geolokator ni mogel najti tega naslova. Koda napake: ' + status);
       }
     });
-
-    let mapOptions = {
-      zoom: 18,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   }
 }
