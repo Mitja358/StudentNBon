@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import { OceneServiceProvider } from "../../providers/ocene-service";
-
 
 /**
  * Generated class for the OcenePage page.
@@ -14,16 +13,47 @@ import { OceneServiceProvider } from "../../providers/ocene-service";
   selector: 'page-ocene',
   templateUrl: 'ocene.html',
 })
-export class OcenePage {
-  
-  restavracija: any; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private oceneService: OceneServiceProvider) {
-    this.restavracija = navParams.get('restavracija'); 
+export class OcenePage {
+  restavracija: any; 
+  seznamOcen = [];
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, private oceneService: OceneServiceProvider) {
+    this.restavracija = navParams.get('restavracija');
+    this.getOcene(this.restavracija);
+    this.getRestavracijaId(this.restavracija); 
   }
 
+  getOcene(restavracija){
+      this.oceneService.getOcene(restavracija).subscribe(data => this.seznamOcen = data);
+  }
+
+  getRestavracijaId(restavracija){
+    console.log(restavracija.id); 
+    return restavracija.id; 
+  } 
+
+  ocena = {datum: '', stOcena: '', komentar: '', vrstaOcena:'', restavracija_id: '' , uporabnik_id: ''};
+
+  //Dodajanje ocene v bazo
+  addOcena(ocena){
+      console.log(this.ocena);  
+      this.oceneService.addOcena(this.ocena); 
+  };
+
+  //Brisanje
+  deleteOcena(ocena){
+    let index = this.seznamOcen.indexOf(ocena);
+    
+      if(index > -1){
+        this.seznamOcen.splice(index, 1);
+      }   
+
+    this.oceneService.deleteReview(ocena.id);
+  } 
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OcenePage');
+    console.log('ionViewDidLoad OcenePage');  
   }
 
 }

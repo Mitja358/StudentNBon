@@ -107,6 +107,7 @@ router.get('/kraj/:mesto', (req, res, next) => {
     knex('restavracija')
     .select()
     .where({'mesto':req.params.mesto})
+    .orderBy('naziv_restavracije')
     .then((data) => {
         if (data) {
             res.json(data);

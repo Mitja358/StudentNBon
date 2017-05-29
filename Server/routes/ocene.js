@@ -111,4 +111,20 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
+router.get('/restavracija/:restavracija_id', (req, res, next) => {
+    knex('ocena')
+    .select()
+    .where({'restavracija_id':req.params.restavracija_id})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.status(404).json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
 module.exports = router; 

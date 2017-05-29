@@ -7,11 +7,91 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Ocene restavracije: <br/> {{restavracija.naziv_restavracije}}</ion-title>
+    <ion-title>{{restavracija.naziv_restavracije}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
+  <form (ngSubmit)="addOcena()" #komentar="ngForm">
+    <ion-list no-lines>
+    <ion-card>
+      <ion-item>
+        <ion-textarea [(ngModel)]="ocena.komentar" placeholder="Ocenite restavracijo" name="komentar" required></ion-textarea> <!-- [(ngModel)]="novaOcena.komentar"-->
+      </ion-item>
+    </ion-card>
+      <ion-item>
+        <ion-label>Vrsta ocene</ion-label>
+        <ion-select [(ngModel)]="ocena.vrstaOcena" name="vrstaOcena" cancelText="Prekliči" okText="Potrdi">
+            <ion-option value="hrana">Hrana</ion-option>
+            <ion-option value="postrezba">Postrežba</ion-option>
+            <ion-option value="cena">Cena</ion-option>
+            <ion-option value="ambient">Ambient</ion-option>
+            <!--<ion-option value="vse">Vse</ion-option>-->
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-range [(ngModel)]="ocena.stOcena" min="0" max="5" pin="true" name="stOcena"> <!--[(ngModel)]="novaOcena.stOcena"-->
+          <ion-icon range-left name=""><img height="20px" src="/img/ocena/star-lightgreen.png" /></ion-icon>
+          <ion-icon range-right name=""><img height="20px" src="/img/ocena/star-green.png" /></ion-icon>
+        </ion-range>
+      </ion-item>
+    </ion-list>
+    <button ion-button class="submit-btn" full type="submit" [disabled]="!komentar.form.valid">Oddaj oceno</button>
+  </form>
 
+  <ion-list>
+    <ion-item text-wrap *ngFor="let restavracija of seznamRestavracij">
+      <div class="item-content"> 
+        <h2><b>{{restavracija.naziv_restavracije}}</b></h2>
+        {{restavracija.naslov+ ', ' + restavracija.mesto}} <br/>
+        Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
+        Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 
+      </div>
+      <div class="item-buttons">
+        <button ion-button item-end id="button-ocene" (click)="podrobnostiRestavracije(restavracija) ">Več</button> <br/>
+        <button ion-button item-end (click)="oceneRestavracij(restavracija) ">Ocene</button> 
+      </div>
+    </ion-item>
+  </ion-list>
+
+
+
+  <ion-list>
+    <ion-item text-wrap *ngFor="let ocena of seznamOcen">
+      <div class="item-content"> 
+        Uporabnik {{ocena.uporabnik_id}}, {{ocena.datum}} <br/>
+        <ion-icon item-right> <img height="30px" src="/img/icons/vrstaOcene/{{ocena.vrstaOcena}}.png" /> </ion-icon>
+        <ion-icon *ngIf="ocena.stOcena == 5" name="">
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+        </ion-icon>
+        <ion-icon *ngIf="ocena.stOcena == 4" name="">
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+        </ion-icon>
+        <ion-icon *ngIf="ocena.stOcena == 3" name="">
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+        </ion-icon>
+        <ion-icon *ngIf="ocena.stOcena == 2" name="">
+          <img height="20px" src="/img/ocena/star-green.png" />
+          <img height="20px" src="/img/ocena/star-green.png" />
+        </ion-icon>
+        <ion-icon *ngIf="ocena.stOcena == 1" name="">
+          <img height="20px" src="/img/ocena/star-green.png" />
+        </ion-icon><br/>
+        {{ocena.komentar}}
+      </div>
+      <div class="item-buttons">
+        <button ion-button item-end (click)="deleteOcena(ocena)" id="button-delete">Izbriši</button>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>
