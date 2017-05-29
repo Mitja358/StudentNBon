@@ -22,7 +22,8 @@ export class OcenePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, private oceneService: OceneServiceProvider) {
     this.restavracija = navParams.get('restavracija');
     this.getOcene(this.restavracija);
-    this.getRestavracijaId(this.restavracija); 
+    //this.getRestavracijaId(this.restavracija); 
+
     this.ocena = {datum: '', stOcena: '', komentar: '', vrstaOcena:'', restavracija_id: this.restavracija.id, uporabnik_id: ''};
   }
 
@@ -30,13 +31,14 @@ export class OcenePage {
       this.oceneService.getOcene(restavracija).subscribe(data => this.seznamOcen = data);
   }
 
-  getRestavracijaId(restavracija){
+  /* getRestavracijaId(restavracija){
     console.log(restavracija.id); 
     return restavracija.id; 
-  } 
+  }*/
 
   //Dodajanje ocene v bazo
   addOcena(ocena){
+      this.ocena.datum= new Date();     
       console.log(this.ocena);  
       this.oceneService.addOcena(this.ocena); 
   };
