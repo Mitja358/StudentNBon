@@ -20,7 +20,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { RestavracijeServiceProvider } from '../providers/restavracije-service';
 import { MenijiServiceProvider } from '../providers/meniji-service';
 import { OceneServiceProvider } from '../providers/ocene-service';
-import { VrstaMenijaServiceProvider } from '../providers/vrstamenija-service';
 import { AvtorizacijaServiceProvider } from '../providers/avtorizacija-service';
 
 @NgModule({
@@ -62,7 +61,6 @@ import { AvtorizacijaServiceProvider } from '../providers/avtorizacija-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestavracijeServiceProvider,
     MenijiServiceProvider,
-    VrstaMenijaServiceProvider,
     OceneServiceProvider,
     AvtorizacijaServiceProvider
   ]

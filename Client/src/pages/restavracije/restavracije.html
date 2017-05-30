@@ -1,16 +1,7 @@
-<!--
-  Generated template for the RestavracijePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary">
     <ion-title><img height="70px" src="/img/logo/studentnbon.png" /></ion-title>
   </ion-navbar>
-    <!--<ion-searchbar
-      [(ngModel)]="query"
-    </ion-searchbar>-->
   <ion-searchbar (ionInput)="filter($event)" [showCancelButton]="ShowCancel" placeholder="Poišči restavracijo...">  
   </ion-searchbar>
     <ion-list id="mesto-list">
@@ -65,7 +56,8 @@
         <h2><b>{{restavracija.naziv_restavracije}}</b></h2>
         {{restavracija.naslov+ ', ' + restavracija.mesto}} <br/>
         Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
-        Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 
+        Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/>
+        Telefonska številka: {{restavracija.telefon}} <br/>
       </div>
       <div class="item-buttons">
         <button ion-button item-end id="button-ocene" (click)="podrobnostiRestavracije(restavracija) ">Več</button> <br/>
@@ -73,5 +65,4 @@
       </div>
     </ion-item>
   </ion-list>
-
 </ion-content>

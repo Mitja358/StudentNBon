@@ -108,12 +108,46 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
+router.get('/upime/:upIme', (req, res, next) => {
+    knex('uporabnik')
+    .select('id')
+    .where({'upIme':req.params.upIme})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.status(404).json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
+
 // Preverjanje prijave
 router.post('/prijava', (req, res, next) => {
    // console.log(req.body.email);
     knex('uporabnik')
     .select('upIme', 'geslo', 'id')
     .where({'upIme':req.body.upIme}).andWhere({'geslo':req.body.geslo}).limit(1)
+    .then((data) => {
+        console.log(data);
+        if(data.length == 0)
+            res.json(false)
+        else
+            res.json(data)
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
+
+router.get('/prijava/:upIme&:geslo', (req, res, next) => {
+   // console.log(req.body.email);
+    knex('uporabnik')
+    .select('upIme', 'geslo', 'id')
+    .where({'upIme':req.params.upIme}).andWhere({'geslo':req.params.geslo})
     .then((data) => {
         console.log(data);
         if(data.length == 0)

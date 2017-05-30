@@ -7,6 +7,8 @@ exports.up = function(knex, Promise) {
     table.string('mesto');
     table.decimal('vrednostObroka');
     table.decimal('vrednostDoplacila');
+    table.string('telefon');
+    table.boolean('dostava')
     }).createTable('meni', (table) => {
         table.increments('id').primary();
         table.string('juha');
