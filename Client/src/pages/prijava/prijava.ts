@@ -6,10 +6,11 @@ import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-servic
 import { TabsPage } from "../tabs/tabs";
 
 // Za testiranje localStorage odkomentiraj naslednji 2 vrstici, poženi app in spet zakomentiraj! 
+//localStorage.removeItem("id");
 //localStorage.removeItem("upIme");
 //localStorage.removeItem("geslo");
-let upIme_local = localStorage.getItem("upIme");
-let geslo_local = localStorage.getItem("geslo");
+//let upIme_local = localStorage.getItem("upIme");
+//let geslo_local = localStorage.getItem("geslo");
 
 @IonicPage()
 @Component({
@@ -20,25 +21,32 @@ let geslo_local = localStorage.getItem("geslo");
 export class PrijavaPage {  
   loading: Loading;
   prijavniPodatki = { upIme: '', geslo: '' };
+  upIme_local: string;
+  geslo_local: string;
 
-  constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
+  constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+    console.info('constructor');
+    this.upIme_local = localStorage.getItem('upIme');
+    this.geslo_local = localStorage.getItem('geslo');
+   }
   
   public ustvariRacun() {
     this.navCtrl.push('RegistracijaPage');
   }
 
   // Preverja vrednost localStorage
-  ionViewDidLoad() {    
-    if (upIme_local !== null) {
-      console.log("DidLoad: " + upIme_local);
+  ionViewDidLoad() {
+    console.log(this.upIme_local, this.geslo_local);    
+    if (this.upIme_local !== null && this.geslo_local !== null) {
+      console.log("DidLoad: " + this.upIme_local);
       this.navCtrl.push(TabsPage);
     } 
   }
 
   public prijava() {
-    console.log("LocalStorage1: " + upIme_local + ", " + geslo_local);
-
+    console.log("LocalStorage1: " + this.upIme_local + ", " + this.geslo_local);
     this.pokaziNalaganje()
+    //Prej je bilo namesto .then -> .subscribe in subscribe v oklepaju!
     this.avtorizacija.prijava(this.prijavniPodatki).then(allowed => {
 
       if (allowed) {

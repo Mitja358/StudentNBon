@@ -34,6 +34,7 @@ export class NastavitvePage {
 
   odjava() {
     //this.avtorizacija.odjava().subscribe(success => {
+      localStorage.removeItem("id");
       localStorage.removeItem("upIme");
       localStorage.removeItem("geslo");
       this.navCtrl.push(PrijavaPage);
