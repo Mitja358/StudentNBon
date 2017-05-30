@@ -48,7 +48,7 @@ export class OceneServiceProvider {
       let body = JSON.stringify(data);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post('http://localhost:3000/ocene', body, options)
+      return this.http.post(this.url, body, options)
         .map(res=> res.json())
         .subscribe(data => {
           console.log(data);
@@ -58,7 +58,7 @@ export class OceneServiceProvider {
   }
   
   deleteReview(id){ 
-    this.http.delete('http://localhost:3000/ocene/' + id).subscribe((res) => {
+    this.http.delete(this.url + id).subscribe((res) => {
       console.log(res.json());
     });    
   }

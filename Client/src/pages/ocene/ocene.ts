@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController} from 'ionic-angular';
 import { OceneServiceProvider } from "../../providers/ocene-service";
-
 
 @IonicPage()
 @Component({
@@ -14,13 +13,11 @@ export class OcenePage {
   seznamOcen = [];
   ocena : any;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, private oceneService: OceneServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, private oceneService: OceneServiceProvider, private alertCtrl: AlertController) {
     this.restavracija = navParams.get('restavracija');
     this.getOcene(this.restavracija);
-    //this.getRestavracijaId(this.restavracija); 
-    //this.getUporabnik(); 
 
-    let upIme = localStorage.getItem('upIme');
+    let id = localStorage.getItem('id');
 
     function getDatum() {
       var date = new Date();
@@ -28,32 +25,28 @@ export class OcenePage {
       return datumNow;
     }
 
-    let idRestavracije = this.restavracija.id; 
+    let idRestavracije = this.restavracija.id;
 
-    this.ocena = {datum: getDatum(), stOcena: '', komentar: '', vrstaOcena:'', restavracija_id: idRestavracije, uporabnik_id: '1'};
+    this.ocena = {datum: getDatum(), stOcena: '', komentar: '', vrstaOcena:'', restavracija_id: idRestavracije, uporabnik_id: id};
   }
 
   getOcene(restavracija){
       this.oceneService.getOcene(restavracija).subscribe(data => this.seznamOcen = data);
   }
 
-  /* getRestavracijaId(restavracija){
-    console.log(restavracija.id); 
-    return restavracija.id; 
-  }
-
-  getUporabnik(){
-    let upIme = localStorage.getItem('upIme');
-  }*/
-
   addOcena(ocena, restavracija){
-      console.log(this.ocena);  
+      //console.log(this.ocena);  
       this.oceneService.addOcena(this.ocena); 
+      this.presentAlert("Hvala za vaš odziv!");
+      this.getOcene(this.restavracija); 
       this.getOcene(this.restavracija);
   };
 
- 
   deleteOcena(ocena){
+    if(ocena.uporabnik_id != localStorage.getItem('id')){ 
+      console.log("Komentarja ne morete izbrisati!"); 
+      this.presentAlert("Komentarja ne morete izbrisati! Izbrišete lahko le lastne komentarje!"); 
+    }else{
     let index = this.seznamOcen.indexOf(ocena);
     
       if(index > -1){
@@ -61,7 +54,17 @@ export class OcenePage {
       }   
 
     this.oceneService.deleteReview(ocena.id);
+    }
   } 
+
+presentAlert(text) {
+  let alert = this.alertCtrl.create({
+    //title: '',
+    subTitle: text,
+    buttons: ['OK']
+  });
+  alert.present(prompt);
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OcenePage');  
