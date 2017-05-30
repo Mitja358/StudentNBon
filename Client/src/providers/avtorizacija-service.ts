@@ -32,7 +32,6 @@ export class AvtorizacijaServiceProvider {
   public prijava(prijavni_podatki) {
     if (prijavni_podatki.upIme === null || prijavni_podatki.geslo === null) {
       // Observable lahko nadomestijo HTTP klici 
-     // return Observable.throw("Prosimo vnesite podatke za prijavo");
     } else {
         let headers = new Headers({
           'Content-Type': 'application/json'
@@ -52,10 +51,8 @@ export class AvtorizacijaServiceProvider {
             if (response.json() != false) {
               localStorage.removeItem("id");
               localStorage.removeItem("upIme");
-              localStorage.removeItem("geslo");
               localStorage.id = response.json()[0].id;
               localStorage.upIme = prijavni_podatki.upIme;
-              localStorage.geslo = prijavni_podatki.geslo;
             } else { 
               // Naredi nekaj
              }
