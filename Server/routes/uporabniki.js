@@ -143,4 +143,21 @@ router.post('/prijava', (req, res, next) => {
     });
 });
 
+router.get('/prijava/:upIme&:geslo', (req, res, next) => {
+   // console.log(req.body.email);
+    knex('uporabnik')
+    .select('upIme', 'geslo', 'id')
+    .where({'upIme':req.params.upIme}).andWhere({'geslo':req.params.geslo})
+    .then((data) => {
+        console.log(data);
+        if(data.length == 0)
+            res.json(false)
+        else
+            res.json(data)
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
+
 module.exports = router; 

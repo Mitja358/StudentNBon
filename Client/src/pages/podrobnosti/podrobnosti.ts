@@ -1,16 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MenijiServiceProvider } from "../../providers/meniji-service";
-import { VrstaMenijaServiceProvider } from "../../providers/vrstamenija-service";
 import { ZemljevidPage } from "../zemljevid/zemljevid";
 import { OceneServiceProvider } from "../../providers/ocene-service";
-
-/**
- * Generated class for the PodrobnostiPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

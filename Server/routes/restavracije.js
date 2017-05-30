@@ -39,6 +39,8 @@ router.post('/', (req, res, next) => {
         mesto: req.body.mesto,
         vrednostObroka: req.body.vrednostObroka,
         vrednostDoplacila: req.body.vrednostDoplacila,
+        telefon: req.body.telefon,
+        dostava: req.body.dostava
     })
     .save()
     .then((data) => {
@@ -76,7 +78,9 @@ router.put('/:id', (req, res, next) => {
             naslov: req.body.naslov || Restavracija.get('naslov'),
             mesto: req.body.mesto || Restavracija.get('mesto'),
             vrednostObroka: req.body.vrednostObroka || Restavracija.get('vrednostObroka'),
-            vrednostDoplacila: req.body.vrednostDoplacila || Restavracija.get('vrednostDoplacila')
+            vrednostDoplacila: req.body.vrednostDoplacila || Restavracija.get('vrednostDoplacila'),
+            telefon: req.body.telefon || Restavracija.get('telefon'),
+            dostava: req.body.dostava || Restavracija.get('dostava')
         })
         .then((data) => {
             res.json(data);
