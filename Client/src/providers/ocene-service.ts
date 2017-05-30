@@ -16,7 +16,7 @@ export class OceneServiceProvider {
   }
 
   getOcene(restavracija){
-    return this.http.get(this.url + "restavracija/" + restavracija.id)
+    return this.http.get(this.url + "restavracijaOcena/" + restavracija.id)
     .do(this.logResponse)
     .map(this.extractData)
     .do(this.logResponse) 

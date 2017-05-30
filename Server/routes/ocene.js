@@ -160,4 +160,23 @@ router.get('/povprecnaOcena/:restavracija_id', (req, res, next) => {
     });
 });
 
+router.get('/restavracijaOcena/:restavracija_id', (req, res, next) => {
+    knex()
+    .select('ocena.id', 'ocena.datum', 'ocena.stOcena', 'ocena.komentar', 'ocena.vrstaOcena', 'ocena.restavracija_id', 'ocena.uporabnik_id' , 'uporabnik.upIme')
+    .from('ocena')
+    .join('uporabnik', 'ocena.uporabnik_id', '=', 'uporabnik.id')
+    .where({'restavracija_id':req.params.restavracija_id})
+    .then((data) => {
+        if (data) {
+            res.json(data);
+        }
+        else {
+            res.status(404).json(err);
+        }
+    })
+    .catch((err) => {
+        res.json(err);
+    });
+});
+
 module.exports = router; 

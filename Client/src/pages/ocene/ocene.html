@@ -35,24 +35,9 @@
   </form>
 
   <ion-list>
-    <ion-item text-wrap *ngFor="let restavracija of seznamRestavracij">
-      <div class="item-content"> 
-        <h2><b>{{restavracija.naziv_restavracije}}</b></h2>
-        {{restavracija.naslov+ ', ' + restavracija.mesto}} <br/>
-        Vrednost obroka: {{restavracija.vrednostObroka}} €<br/> 
-        Vrednost doplačila: {{restavracija.vrednostDoplacila}} €<br/> 
-      </div>
-      <div class="item-buttons">
-        <button ion-button item-end id="button-ocene" (click)="podrobnostiRestavracije(restavracija) ">Več</button> <br/>
-        <button ion-button item-end (click)="oceneRestavracij(restavracija) ">Ocene</button> 
-      </div>
-    </ion-item>
-  </ion-list>
-
-  <ion-list>
     <ion-item text-wrap *ngFor="let ocena of seznamOcen">
       <div class="item-content"> 
-        Uporabnik {{ocena.uporabnik_id}}, {{ocena.datum}} <br/>
+        {{ocena.upIme}}, {{ocena.datum}} <br/>
         <ion-icon item-right> <img height="30px" src="/img/icons/vrstaOcene/{{ocena.vrstaOcena}}.png" /> </ion-icon>
         <ion-icon *ngIf="ocena.stOcena == 5" name="stOcena5">
           <img height="20px" src="/img/ocena/star-green.png" />
