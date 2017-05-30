@@ -47,27 +47,19 @@ export class AvtorizacijaServiceProvider {
         return this.http.post(this.url + 'uporabniki/prijava', body)
           .toPromise()
           .then(response => {
+            let x = response.json()[0];
             console.log(response.json());
-            if (response.json() == true) {
+            if (response.json() != false) {
+              localStorage.removeItem("id");
               localStorage.removeItem("upIme");
               localStorage.removeItem("geslo");
+              localStorage.id = response.json()[0].id;
               localStorage.upIme = prijavni_podatki.upIme;
               localStorage.geslo = prijavni_podatki.geslo;
             } else { 
               // Naredi nekaj
              }
             return response.json()}, this.handleError);
-
-
-//**************** RAZBIJ NA 2 FUNKCIJI!!! */
-          // Implementacija realnega preverjanja (store a token?)
-        /*
-        let dostop = (prijavni_podatki.geslo === "geslo" && prijavni_podatki.email === "email");
-      
-        this.trenutniUporabnik = new Uporabnik('Mitja', 'mitja.bernjak@gmail.com');
-        observer.next(dostop);
-        observer.complete();
-        */
     }
   }
 
@@ -77,14 +69,29 @@ export class AvtorizacijaServiceProvider {
   }
 
   public registracija(registracijski_podatki) {
-    if (registracijski_podatki.upIme === null || registracijski_podatki.geslo === null) {
-      return Observable.throw("Prosimo vnesite podatke za registracijo");
+    if (registracijski_podatki.ime === null || registracijski_podatki.priimek === null || 
+        registracijski_podatki.email === null || registracijski_podatki.upIme === null || 
+        registracijski_podatki.geslo === null) {
+      //return Observable.throw("Prosimo vnesite podatke za registracijo");
     } else {
-      return Observable.create(observer => {
-        // Implementacija realnega vnosa s POST-om
-        observer.next(true);
-        observer.complete();
+      let headers = new Headers({
+        'Content-Type': 'application/json'
       });
+      let options = new RequestOptions({
+        headers: headers
+      });
+      let body = {
+        ime: registracijski_podatki.ime,
+        priimek: registracijski_podatki.priimek,
+        email: registracijski_podatki.email,
+        upIme: registracijski_podatki.upIme,
+        geslo: registracijski_podatki.geslo
+      };
+      return this.http.post(this.url + 'uporabniki', body)
+        .toPromise()
+        .then(response => {
+          console.log(response.json());
+          return response.json()}, this.handleError); 
     }
   }
 
@@ -99,16 +106,4 @@ export class AvtorizacijaServiceProvider {
       observer.complete();
     });
   }
-
-/*
-  prijava(){
-    // Asinhrona funkcija
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // Tu preveriš na serverju ali je prijava ustrezna
-        resolve(false);
-      }, 1000);
-    });
-  }
-  */
 }

@@ -51,7 +51,7 @@ router.post('/', (req, res, next) => {
     })
     .save()
     .then((data) => {
-        res.json(data);
+        res.json(true);
     })
     .catch((err) => {
         res.json(err);
@@ -112,14 +112,14 @@ router.delete('/:id', (req, res, next) => {
 router.post('/prijava', (req, res, next) => {
    // console.log(req.body.email);
     knex('uporabnik')
-    .select('upIme', 'geslo')
-    .where({'upIme':req.body.upIme}).andWhere({'geslo':req.body.geslo})
+    .select('upIme', 'geslo', 'id')
+    .where({'upIme':req.body.upIme}).andWhere({'geslo':req.body.geslo}).limit(1)
     .then((data) => {
         console.log(data);
         if(data.length == 0)
             res.json(false)
         else
-            res.json(true)
+            res.json(data)
     })
     .catch((err) => {
         res.json(err);

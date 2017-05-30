@@ -6,12 +6,21 @@
 
 <ion-content class="login-content" padding>
   <div class="login-box">
-    <form (ngSubmit)="register()" #registracijskiObrazec="ngForm">
+    <form (ngSubmit)="registracija()" #registracijskiObrazec="ngForm">
       <ion-row>
         <ion-col>
           <ion-list inset>
             <ion-item>
+              <ion-input type="text" placeholder="Vnesite ime" name="ime" [(ngModel)]="registracijskiPodatki.ime" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" placeholder="Vnesite priimek" name="priimek" [(ngModel)]="registracijskiPodatki.priimek" required></ion-input>
+            </ion-item>
+            <ion-item>
               <ion-input type="text" placeholder="Vnesite email" name="email" [(ngModel)]="registracijskiPodatki.email" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" placeholder="Vnesite uporabniško ime" name="upIme" [(ngModel)]="registracijskiPodatki.upIme" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-input type="password" placeholder="Vnesite geslo" name="geslo" [(ngModel)]="registracijskiPodatki.geslo" required></ion-input>

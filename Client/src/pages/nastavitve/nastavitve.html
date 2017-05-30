@@ -4,16 +4,13 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-
 <ion-header>
-
   <ion-navbar color="primary">
     <ion-title>Nastavitve</ion-title>
   </ion-navbar>
 </ion-header>
  
 <ion-content padding>
- 
   <form (submit)="setDefaults()">
     <ion-list>
         <ion-item>
@@ -67,8 +64,9 @@
     </ion-list>
     <button ion-button type="submit" full color="primary">Shrani spremembe</button> 
   </form>
-  <br /><br/><br />
-  <!--Prijavljen si kot: {{uporabnoskoIme}} -->
+
+  <br/><br/><br/>
+  <!-- Prijavljen si kot: {{uporabniskoIme}} -->
   <ion-buttons end>
       <button ion-button class="logout-btn" (click)="odjava()">
         Odjavi se
@@ -102,7 +100,6 @@
         </ion-select>
       </ion-item>
 
-
       <ion-item>
         <ion-label><ion-icon name="cash"></ion-icon>  Vrednost doplačila</ion-label>
         <ion-select [(ngModel)]="cena" multiple="true" cancelText="Prekliči" okText="Potrdi">
@@ -122,6 +119,4 @@
             <ion-icon range-right small name="star"> 5</ion-icon>
           </ion-range>
       </ion-item>-->
-
- 
 </ion-content>

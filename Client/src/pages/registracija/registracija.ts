@@ -10,13 +10,16 @@ import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-servic
 
 export class RegistracijaPage {
   createSuccess = false;
-  registracijskiPodatki = { email: '', geslo: '' };
+  registracijskiPodatki = { ime: '', priimek: '', email: '', upIme: '', geslo: '' };
 
   constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider, private alertCtrl: AlertController, private navParams: NavParams) { }
 
   public registracija() {
-    this.avtorizacija.registracija(this.registracijskiPodatki).subscribe(success => {
-      if (success) {
+    console.log("Registracija page active");
+    this.avtorizacija.registracija(this.registracijskiPodatki).then(allowed => {
+      console.log("Registracija page active2");
+      if (allowed) {
+        console.log("Registracija page active3");
         this.createSuccess = true;
         this.pokaziObvestilo("Uspešno", "Račun uspešno ustvarjen.");
       } else {
