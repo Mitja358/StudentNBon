@@ -14,9 +14,15 @@ import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-servic
 
 export class NastavitvePage {
   private mesto: any; 
+  nastavitveOdjava = [];
+  uporabnik: any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private restavracijeService: RestavracijeServiceProvider, private avtorizacija: AvtorizacijaServiceProvider) {
-    this.getDefaults();  
+    this.getDefaults();
+    let pridobi = localStorage.getItem("uporabnik");
+    let poljeObjektov = JSON.parse(pridobi);
+    let uporabnik_local = poljeObjektov[0].upIme;
+    this.uporabnik = {uporabnik_local};  
   }
 
   getDefaults(){
@@ -34,8 +40,8 @@ export class NastavitvePage {
 
   odjava() {
     //this.avtorizacija.odjava().subscribe(success => {
-      localStorage.removeItem("id");
-      localStorage.removeItem("upIme");
+      //localStorage.removeItem("id");
+      localStorage.removeItem("uporabnik");
       this.navCtrl.push(PrijavaPage);
       console.log("Odjava");
     //});

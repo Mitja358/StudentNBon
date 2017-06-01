@@ -59,14 +59,14 @@
     <button ion-button type="submit" full color="primary">Shrani spremembe</button> 
   </form>
 
-  <br/><br/><br/>
-  <!-- Prijavljen si kot: {{uporabniskoIme}} -->
-  <ion-buttons end>
-      <button ion-button class="logout-btn" (click)="odjava()">
-        Odjavi se
-        <ion-icon name="log-out"></ion-icon>
-      </button>
-    </ion-buttons>
+  <br/><br/>
+      Prijavljen/-a si kot: <b>{{uporabnik.uporabnik_local}}</b><br/><br/>
+      <ion-buttons end>
+        <button ion-button class="logout-btn" (click)="odjava()">
+          Odjavi se
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+      </ion-buttons>
 
       <!--
       <ion-item>

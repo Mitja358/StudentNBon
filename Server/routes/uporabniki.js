@@ -131,7 +131,7 @@ router.post('/prijava', (req, res, next) => {
     .select('upIme', 'geslo', 'id')
     .where({'upIme':req.body.upIme}).andWhere({'geslo':req.body.geslo}).limit(1)
     .then((data) => {
-        console.log(data);
+        //console.log(data);
         if(data.length == 0)
             res.json(false)
         else
