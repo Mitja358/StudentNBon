@@ -127,12 +127,11 @@ router.get('/upime/:upIme', (req, res, next) => {
 
 // Preverjanje prijave
 router.post('/prijava', (req, res, next) => {
-   // console.log(req.body.email);
     knex('uporabnik')
     .select('upIme', 'geslo', 'id')
     .where({'upIme':req.body.upIme}).andWhere({'geslo':req.body.geslo}).limit(1)
     .then((data) => {
-        console.log(data);
+        //console.log(data);
         if(data.length == 0)
             res.json(false)
         else

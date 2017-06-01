@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+
+import { PrijavaPage } from '../../pages/prijava/prijava';
 import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-service';
 
 @IonicPage()
@@ -15,12 +17,10 @@ export class RegistracijaPage {
   constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider, private alertCtrl: AlertController, private navParams: NavParams) { }
 
   public registracija() {
-    console.log("Registracija page active");
     this.avtorizacija.registracija(this.registracijskiPodatki).then(allowed => {
-      console.log("Registracija page active2");
       if (allowed) {
-        console.log("Registracija page active3");
-        this.createSuccess = true;
+        //this.createSuccess = true;
+        this.navCtrl.push(PrijavaPage);
         this.pokaziObvestilo("Uspešno", "Račun uspešno ustvarjen.");
       } else {
         this.pokaziObvestilo("Napaka", "Težava pri ustvarjanju računa.")
@@ -52,5 +52,4 @@ export class RegistracijaPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistracijaPage');
   }
-
 }

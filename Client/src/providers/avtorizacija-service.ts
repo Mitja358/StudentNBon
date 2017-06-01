@@ -32,7 +32,6 @@ export class AvtorizacijaServiceProvider {
   public prijava(prijavni_podatki) {
     if (prijavni_podatki.upIme === null || prijavni_podatki.geslo === null) {
       // Observable lahko nadomestijo HTTP klici 
-     // return Observable.throw("Prosimo vnesite podatke za prijavo");
     } else {
         let headers = new Headers({
           'Content-Type': 'application/json'
@@ -47,15 +46,28 @@ export class AvtorizacijaServiceProvider {
         return this.http.post(this.url + 'uporabniki/prijava', body)
           .toPromise()
           .then(response => {
-            let x = response.json()[0];
-            console.log(response.json());
+            //let x = response.json()[0];
+            //console.log(response.json());
             if (response.json() != false) {
-              localStorage.removeItem("id");
-              localStorage.removeItem("upIme");
-              localStorage.removeItem("geslo");
-              localStorage.id = response.json()[0].id;
-              localStorage.upIme = prijavni_podatki.upIme;
-              localStorage.geslo = prijavni_podatki.geslo;
+              //localStorage.removeItem("id");
+              //localStorage.removeItem("upIme");
+              localStorage.removeItem("uporabnik");
+
+              let zapis = response.json();
+              let filter = new Array();
+              filter[0] = "id";
+              filter[1] = "upIme";
+              let besedilo = JSON.stringify(zapis, filter, "\t");
+
+              console.log("JSON stringify: " + zapis[0].upIme);
+              localStorage.setItem("uporabnik", besedilo);
+
+              let pridobi = localStorage.getItem("uporabnik");
+              let poljeObjektov = JSON.parse(pridobi);
+
+              console.log("JSON parse: " + poljeObjektov[0].upIme);
+              //localStorage.id = response.json()[0].id;
+              //localStorage.upIme = prijavni_podatki.upIme;
             } else { 
               // Naredi nekaj
              }

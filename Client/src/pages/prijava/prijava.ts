@@ -22,12 +22,14 @@ export class PrijavaPage {
   loading: Loading;
   prijavniPodatki = { upIme: '', geslo: '' };
   upIme_local: string;
-  geslo_local: string;
 
   constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
-    console.info('constructor');
-    this.upIme_local = localStorage.getItem('upIme');
-    this.geslo_local = localStorage.getItem('geslo');
+    //let pridobi = localStorage.getItem("uporabnik");
+    //console.log("PRIDOBI: " + pridobi);
+    //let poljeObjektov = JSON.parse(pridobi);
+    //console.log("poljeObjektov: " + poljeObjektov[0].upIme);
+    //this.upIme_local = poljeObjektov[0].upIme;
+    //console.log("NOVO: " + this.upIme_local); 
    }
   
   public ustvariRacun() {
@@ -35,20 +37,19 @@ export class PrijavaPage {
   }
 
   // Preverja vrednost localStorage
-  ionViewDidLoad() {
-    console.log(this.upIme_local, this.geslo_local);    
-    if (this.upIme_local !== null && this.geslo_local !== null) {
-      console.log("DidLoad: " + this.upIme_local);
+  ionViewDidLoad() {    
+    if (localStorage.getItem("uporabnik") !== null) {
+      let pridobi = localStorage.getItem("uporabnik");
+      let poljeObjektov = JSON.parse(pridobi);
+      this.upIme_local = poljeObjektov[0].upIme;
       this.navCtrl.push(TabsPage);
     } 
   }
 
   public prijava() {
-    console.log("LocalStorage1: " + this.upIme_local + ", " + this.geslo_local);
     this.pokaziNalaganje()
     //Prej je bilo namesto .then -> .subscribe in subscribe v oklepaju!
     this.avtorizacija.prijava(this.prijavniPodatki).then(allowed => {
-
       if (allowed) {
         this.navCtrl.setRoot(TabsPage);
       } else {
@@ -56,7 +57,7 @@ export class PrijavaPage {
       }
     },
     error => {
-      this.pokaziNapako('error');
+      this.pokaziNapako('Error');
     });
   }
 
