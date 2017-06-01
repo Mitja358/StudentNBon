@@ -14,8 +14,14 @@ export class OcenePage {
   restavracija: any;
   seznamOcen = [];
   ocena: any;
+  uporabnik: any; 
 
   idPrijavljenega = localStorage.getItem('id');
+
+  pridobi = localStorage.getItem("uporabnik");
+  poljeObjektov = JSON.parse(this.pridobi);
+  uporabnik_local = this.poljeObjektov[0].id;
+    
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private oceneService: OceneServiceProvider, private alertCtrl: AlertController) {
     this.restavracija = navParams.get('restavracija');
@@ -23,7 +29,12 @@ export class OcenePage {
 
     this.getOcene(this.restavracija);
 
-    this.ocena = { datum: this.getDatum(), stOcena: '', komentar: '', vrstaOcena: '', restavracija_id: this.restavracija.id, uporabnik_id: localStorage.getItem('id') };
+    let pridobi = localStorage.getItem("uporabnik");
+    let poljeObjektov = JSON.parse(pridobi);
+    let uporabnik_local = poljeObjektov[0].id;
+    this.uporabnik = {uporabnik_local};  
+
+    this.ocena = { datum: this.getDatum(), stOcena: '', komentar: '', vrstaOcena: '', restavracija_id: this.restavracija.id, uporabnik_id: uporabnik_local};
   }
 
   getDatum() {

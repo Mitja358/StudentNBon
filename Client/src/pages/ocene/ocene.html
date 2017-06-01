@@ -57,8 +57,8 @@
         {{ocena.komentar}}
       </div>
       <div class="item-buttons" >
-        <button *ngIf="ocena.uporabnik_id == idPrijavljenega" ion-button item-end (click)="deleteOcena(ocena)" id="button-delete">Izbriši</button><br/>
-        <button *ngIf="ocena.uporabnik_id == idPrijavljenega" ion-button item-end (click)="updateOcenaPage(restavracija, ocena)" id="button-update">Uredi</button>
+        <button *ngIf="ocena.uporabnik_id == uporabnik_local" ion-button item-end (click)="deleteOcena(ocena)" id="button-delete">Izbriši</button><br/>
+        <button *ngIf="ocena.uporabnik_id == uporabnik_local" ion-button item-end (click)="updateOcenaPage(restavracija, ocena)" id="button-update">Uredi</button>
       </div>
     </ion-item>
   </ion-list>
