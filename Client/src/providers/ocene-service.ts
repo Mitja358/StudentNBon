@@ -31,24 +31,19 @@ export class OceneServiceProvider {
     .catch(this.catchError)
   } 
 
-  private catchError(error: Response | any){
-    console.log(error);
-    return Observable.throw(error.json().error || "Server error");
-  }
-
-  private logResponse(res: Response){
-    console.log(res);
-  }
-
-  private extractData(res:Response){
-    return res.json();
-  }
-
   addOcena(data) { 
       let body = JSON.stringify(data);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
       return this.http.post(this.url, body, options)
+        .map(res=> {return res.json();});
+  }
+
+  updateOcena(data, id) { 
+      let body = JSON.stringify(data);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.put(this.url + id, body, options)
         .map(res=> res.json())
         .subscribe(data => {
           console.log(data);
@@ -62,5 +57,18 @@ export class OceneServiceProvider {
       console.log(res.json());
     });    
   }
+
+  private catchError(error: Response | any){
+    console.log(error);
+    return Observable.throw(error.json().error || "Server error");
+  }
+
+  private logResponse(res: Response){
+    console.log(res);
+  }
+
+  private extractData(res:Response){
+    return res.json();
+  } 
  
 }

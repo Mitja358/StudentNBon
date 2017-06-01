@@ -40,37 +40,25 @@
         {{ocena.upIme}}, {{ocena.datum}} <br/>
         <ion-icon item-right> <img height="30px" src="/img/icons/vrstaOcene/{{ocena.vrstaOcena}}.png" /> </ion-icon>
         <ion-icon *ngIf="ocena.stOcena == 5" name="stOcena5">
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
+          <img *ngFor="let number of [1,2,3,4,5]" height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
-
-        <ion-icon *ngIf="ocena.stOcena == 4" name="stOcena4">
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
+        <ion-icon *ngIf="ocena.stOcena == 4" name="stOcena5">
+          <img *ngFor="let number of [1,2,3,4]" height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
-
-        <ion-icon *ngIf="ocena.stOcena == 3" name="stOcena3">
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
+        <ion-icon *ngIf="ocena.stOcena == 3" name="stOcena5">
+          <img *ngFor="let number of [1,2,3]" height="20px" src="/img/ocena/star-green.png" />
+        </ion-icon> 
+        <ion-icon *ngIf="ocena.stOcena == 2" name="stOcena5">
+          <img *ngFor="let number of [1,2]" height="20px" src="/img/ocena/star-green.png" />
         </ion-icon>
-
-        <ion-icon *ngIf="ocena.stOcena == 2" name="stOcena2">
-          <img height="20px" src="/img/ocena/star-green.png" />
-          <img height="20px" src="/img/ocena/star-green.png" />
-        </ion-icon>
-        <ion-icon *ngIf="ocena.stOcena == 1" name="stOcena1">
+        <ion-icon *ngIf="ocena.stOcena == 1" name="stOcena5">
           <img height="20px" src="/img/ocena/star-green.png" />
         </ion-icon><br/>
         {{ocena.komentar}}
       </div>
-      <div class="item-buttons">
-        <button ion-button item-end (click)="deleteOcena(ocena)" id="button-delete">Izbriši</button>
+      <div class="item-buttons" >
+        <button *ngIf="ocena.uporabnik_id == idPrijavljenega" ion-button item-end (click)="deleteOcena(ocena)" id="button-delete">Izbriši</button><br/>
+        <button *ngIf="ocena.uporabnik_id == idPrijavljenega" ion-button item-end (click)="updateOcenaPage(restavracija, ocena)" id="button-update">Uredi</button>
       </div>
     </ion-item>
   </ion-list>

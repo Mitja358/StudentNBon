@@ -6,7 +6,12 @@ page-ocene {
     div.item-buttons{
         float: right;
     }  
-    #item-buttons{
+
+    #button-delete{
         background-color: #311E12;
+    }
+
+    .item-md .item-button{
+        width: 100%;
     }
 }

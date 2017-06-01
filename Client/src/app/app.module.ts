@@ -13,6 +13,7 @@ import { RestavracijePage } from '../pages/restavracije/restavracije';
 import { PodrobnostiPage } from '../pages/podrobnosti/podrobnosti';
 import { NastavitvePage } from '../pages/nastavitve/nastavitve';
 import { OcenePage } from "../pages/ocene/ocene";
+import { UrediOcenoPage } from "../pages/uredi-oceno/uredi-oceno";
 import { ZemljevidPage } from "../pages/zemljevid/zemljevid";
 import { PrijavaPage } from '../pages/prijava/prijava';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -32,6 +33,7 @@ import { AvtorizacijaServiceProvider } from '../providers/avtorizacija-service';
     PodrobnostiPage,
     NastavitvePage,
     OcenePage,
+    UrediOcenoPage,
     ZemljevidPage,
     PrijavaPage,
     TabsPage
@@ -51,6 +53,7 @@ import { AvtorizacijaServiceProvider } from '../providers/avtorizacija-service';
     PodrobnostiPage,
     NastavitvePage,
     OcenePage,
+    UrediOcenoPage,
     ZemljevidPage,
     PrijavaPage,
     TabsPage
