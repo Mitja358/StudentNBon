@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -62,7 +63,8 @@ import { AvtorizacijaServiceProvider } from '../providers/avtorizacija-service';
     RestavracijeServiceProvider,
     MenijiServiceProvider,
     OceneServiceProvider,
-    AvtorizacijaServiceProvider
+    AvtorizacijaServiceProvider,
+    Geolocation
   ]
 })
 export class AppModule {}
