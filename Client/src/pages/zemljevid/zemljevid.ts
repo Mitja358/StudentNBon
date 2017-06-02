@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google: any;
 
@@ -22,8 +23,12 @@ export class ZemljevidPage {
   // Referenca mapElement na map div značko v HTML
   @ViewChild('map') mapElement;
   map: any;
+  trenutnaLokacija_lat: number;
+  trenutnaLokacija_lng: number;
+  koncnaLokacija_lat: string;
+  koncnaLokacija_lng: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private navCtrl: NavController, private navParams: NavParams, private geolocation: Geolocation) {
     this.restavracija = navParams.get('restavracija');
   }
 
@@ -33,34 +38,28 @@ export class ZemljevidPage {
   }
 
   initMap() {
+    this.geolocation.getCurrentPosition().then((position) => {
+      this.trenutnaLokacija_lat = position.coords.latitude;
+      this.trenutnaLokacija_lng = position.coords.longitude;
+      console.log("TRENUTNA: " + this.trenutnaLokacija_lat);
+    }, (err) => {
+      console.log('Napaka pri pridobivanju trenutne lokacije.', err);
+    });
+
     let directionsService = new google.maps.DirectionsService;
     let directionsDisplay = new google.maps.DirectionsRenderer;
+
     let mapOptions = {
       zoom: 18,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    directionsDisplay.setMap(this.map);
-
-    calculateAndDisplayRoute(directionsService, directionsDisplay, this.restavracija.naslov, this.restavracija.mesto);
-
-    function calculateAndDisplayRoute(directionsService, directionsDisplay, naslov, mesto) {
-      directionsService.route({
-        origin: 'Murska Sobota',
-        destination: naslov + mesto,
-        travelMode: 'DRIVING'
-      }, function (response, status) {
-        if (status === 'OK') {
-          directionsDisplay.setDirections(response);
-        } else {
-          alert('Napaka pri pridobivanju napotkov. Koda napake: ' + status);
-        }
-      });
-    }
 
     this.geocoder.geocode ({ 'address' : this.restavracija.naslov + ', ' + this.restavracija.mesto }, (destinations, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         this.map.setCenter(destinations[0].geometry.location);
+        this.koncnaLokacija_lat = destinations[0].geometry.location.lat();
+        var primer = destinations[0].geometry.location.lat();
+        this.koncnaLokacija_lng = destinations[0].geometry.location.lng();
         let marker = new google.maps.Marker({
           map: this.map,
           position: destinations[0].geometry.location
@@ -78,6 +77,27 @@ export class ZemljevidPage {
       } else {
         alert ('Geolokator ni mogel najti tega naslova. Koda napake: ' + status);
       }
+      calculateAndDisplayRoute(directionsService, directionsDisplay, this.restavracija.naslov, this.restavracija.mesto, this.trenutnaLokacija_lat, this.trenutnaLokacija_lng, this.koncnaLokacija_lat, this.koncnaLokacija_lng);
     });
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay, naslov, mesto, trenutnaLokacija_lat, trenutnaLokacija_lng, koncnaLokacija_lat, koncnaLokacija_lng) {
+      console.log("LAT: " + trenutnaLokacija_lat);
+      console.log("LNG: " + trenutnaLokacija_lng);
+
+      directionsService.route({
+        origin: {lat: trenutnaLokacija_lat, lng: trenutnaLokacija_lng},
+        destination: {lat: koncnaLokacija_lat, lng: koncnaLokacija_lng},
+        travelMode: 'DRIVING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+        } else {
+          alert('Napaka pri pridobivanju napotkov. Koda napake: ' + status);
+        }
+      });
+    }
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    directionsDisplay.setMap(this.map);
   }
 }
