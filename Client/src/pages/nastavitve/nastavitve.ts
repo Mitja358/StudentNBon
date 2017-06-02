@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController  } from 'ionic-angular'; //AlertController
+import { IonicPage, NavController, NavParams, LoadingController  } from 'ionic-angular';
 
 import { RestavracijeServiceProvider } from "../../providers/restavracije-service";
 import { RestavracijePage } from '../../pages/restavracije/restavracije';
@@ -39,11 +39,8 @@ export class NastavitvePage {
   }
 
   odjava() {
-    //this.avtorizacija.odjava().subscribe(success => {
-      //localStorage.removeItem("id");
       localStorage.removeItem("uporabnik");
       this.navCtrl.push(PrijavaPage);
       console.log("Odjava");
-    //});
   }
 };

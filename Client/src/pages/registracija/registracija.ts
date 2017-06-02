@@ -11,7 +11,6 @@ import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-servic
 })
 
 export class RegistracijaPage {
-  createSuccess = false;
   registracijskiPodatki = { ime: '', priimek: '', email: '', upIme: '', geslo: '' };
 
   constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider, private alertCtrl: AlertController, private navParams: NavParams) { }
@@ -19,9 +18,8 @@ export class RegistracijaPage {
   public registracija() {
     this.avtorizacija.registracija(this.registracijskiPodatki).then(allowed => {
       if (allowed) {
-        //this.createSuccess = true;
-        this.navCtrl.push(PrijavaPage);
         this.pokaziObvestilo("Uspešno", "Račun uspešno ustvarjen.");
+        this.navCtrl.push(PrijavaPage);
       } else {
         this.pokaziObvestilo("Napaka", "Težava pri ustvarjanju računa.")
       }
@@ -37,12 +35,7 @@ export class RegistracijaPage {
       subTitle: text,
       buttons: [
         {
-          text: 'OK',
-          handler: data => {
-            if (this.createSuccess) {
-              this.navCtrl.popToRoot();
-            }
-          }
+          text: 'OK'
         }
       ]
     });

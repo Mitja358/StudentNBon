@@ -41,9 +41,8 @@ export class ZemljevidPage {
     this.geolocation.getCurrentPosition().then((position) => {
       this.trenutnaLokacija_lat = position.coords.latitude;
       this.trenutnaLokacija_lng = position.coords.longitude;
-      console.log("TRENUTNA: " + this.trenutnaLokacija_lat);
-    }, (err) => {
-      console.log('Napaka pri pridobivanju trenutne lokacije.', err);
+    }).catch((error) => {
+      console.log('Napaka pri pridobivanju trenutne lokacije.', error);
     });
 
     let directionsService = new google.maps.DirectionsService;
@@ -58,7 +57,6 @@ export class ZemljevidPage {
       if (status === google.maps.GeocoderStatus.OK) {
         this.map.setCenter(destinations[0].geometry.location);
         this.koncnaLokacija_lat = destinations[0].geometry.location.lat();
-        var primer = destinations[0].geometry.location.lat();
         this.koncnaLokacija_lng = destinations[0].geometry.location.lng();
         let marker = new google.maps.Marker({
           map: this.map,
@@ -81,11 +79,8 @@ export class ZemljevidPage {
     });
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay, naslov, mesto, trenutnaLokacija_lat, trenutnaLokacija_lng, koncnaLokacija_lat, koncnaLokacija_lng) {
-      console.log("LAT: " + trenutnaLokacija_lat);
-      console.log("LNG: " + trenutnaLokacija_lng);
-
       directionsService.route({
-        origin: {lat: trenutnaLokacija_lat, lng: trenutnaLokacija_lng},
+        origin: {lat: 46.56445, lng: 15.624208}, //Za dostop do trenutne lokacije se tukaj uporabi trenutnaLokacija_lat in trenutnaLokacija_lng
         destination: {lat: koncnaLokacija_lat, lng: koncnaLokacija_lng},
         travelMode: 'DRIVING'
       }, function (response, status) {

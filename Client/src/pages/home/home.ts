@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-service';
 
 @Component({
   selector: 'page-home',
@@ -8,17 +7,6 @@ import { AvtorizacijaServiceProvider } from '../../providers/avtorizacija-servic
 })
 
 export class HomePage {
-  uporabniskoIme = '';
-  email = '';
-  constructor(private navCtrl: NavController, private avtorizacija: AvtorizacijaServiceProvider) {
-    let informacije = this.avtorizacija.pridobiPodatkeUporabnika();
-    this.uporabniskoIme = informacije['ime'];
-    this.email = informacije['email'];
-  }
+  constructor(private navCtrl: NavController) { }
 
-  public odjava() {
-    this.avtorizacija.odjava().subscribe(success => {
-      this.navCtrl.setRoot('PrijavaPage');
-    });
-  }
 }
