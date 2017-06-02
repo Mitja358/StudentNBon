@@ -48,7 +48,7 @@ export class OceneServiceProvider {
         .subscribe(data => {
           console.log(data);
         }, error => {
-            console.log("Oooops!");
+            console.log("Napaka!");
         });
   }
   
