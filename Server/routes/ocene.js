@@ -161,7 +161,7 @@ router.get('/povprecnaOcena/:restavracija_id', (req, res, next) => {
 });
 
 router.get('/restavracijaOcena/:restavracija_id', (req, res, next) => {
-    knex()
+    knex('ocena')
     .select('ocena.id', 'ocena.datum', 'ocena.stOcena', 'ocena.komentar', 'ocena.vrstaOcena', 'ocena.restavracija_id', 'ocena.uporabnik_id' , 'uporabnik.upIme')
     .from('ocena')
     .join('uporabnik', 'ocena.uporabnik_id', '=', 'uporabnik.id')
