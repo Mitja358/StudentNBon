@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { OceneServiceProvider } from "../../providers/ocene-service"
+import { OcenePage } from "../ocene/ocene";
 
 @IonicPage()
 @Component({
@@ -8,6 +9,8 @@ import { OceneServiceProvider } from "../../providers/ocene-service"
   templateUrl: 'uredi-oceno.html',
 })
 export class UrediOcenoPage {
+  seznamOcen: any;
+  ocena: any;
 
   id: any;
   restavracija: any;
@@ -36,6 +39,14 @@ export class UrediOcenoPage {
       this.presentAlert("Sprememba zabeležena.");
     }
   }
+
+  /*
+  oceneRestavracij(restavracija, ocena){
+    this.navCtrl.push(OcenePage, {
+      restavracija: restavracija,
+      ocena: ocena
+    });
+  }*/
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UrediOcenoPage');

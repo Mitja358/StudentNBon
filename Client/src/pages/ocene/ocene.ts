@@ -21,7 +21,6 @@ export class OcenePage {
   pridobi = localStorage.getItem("uporabnik");
   poljeObjektov = JSON.parse(this.pridobi);
   uporabnik_local = this.poljeObjektov[0].id;
-    
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private oceneService: OceneServiceProvider, private alertCtrl: AlertController) {
     this.restavracija = navParams.get('restavracija');
@@ -59,7 +58,7 @@ export class OcenePage {
   };
 
   deleteOcena(ocena) {
-    if (ocena.uporabnik_id != localStorage.getItem('id')) {
+    if (ocena.uporabnik_id != this.uporabnik_local) {
       console.log("Komentarja ne morete izbrisati!");
       this.presentAlert("Komentarja ne morete izbrisati! Izbrišete lahko le lastne komentarje!");
     } else {
